@@ -26,8 +26,7 @@ public class UserInterface extends Application {
     private int height = m * Block_length;      //800
     @Override
     public void init() {
-        BattleField battleField = new BattleField(m,n);
-        //...init threads
+        GameLauncher.initialize();
     }
     @Override
     public void start(Stage primaryStage) {
