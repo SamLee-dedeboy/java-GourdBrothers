@@ -1,3 +1,7 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.*;
 
 public class BattleField {
@@ -5,7 +9,7 @@ public class BattleField {
     private static int height;
 
 
-    private static ArrayList<ArrayList <Block>> field;
+    private ArrayList<ArrayList <Block>> field;
     public BattleField(int m, int n) {
         field = new ArrayList<>(n);
         for(int i = 0; i < m; i++){
@@ -21,16 +25,16 @@ public class BattleField {
 
     }
 
-    public static Block at(int x, int y) {
+    public Block at(int x, int y) {
         return field.get(x).get(y);
     }
 
     public String tellName() { return null; }
 
-    public static int getWidth() { return width; }
-    public static int getHeight() {return height; }
+    public int getWidth() { return width; }
+    public int getHeight() {return height; }
 
-    public static void  removeAll() {
+    public void  removeAll() {
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
                 field.get(i).get(j).set(null);
@@ -38,7 +42,8 @@ public class BattleField {
         }
     }
 
-    public static void display() {
+    public void display(GraphicsContext g) {
+        /*
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
                 if(field.get(i).get(j).get() == null) {
@@ -49,7 +54,20 @@ public class BattleField {
             }
             System.out.print("\n");
         }
+        */
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if ((this.at(i,j)).getBeing() != null) {
+                    g.drawImage(this.at(i,j).getBeing().getImage(),
+                            i * Block.size, j * Block.size, Block.size, Block.size);
+                }
+            }
+        }
     }
+    public void drawTest(GraphicsContext g) {
+        g.drawImage(Serpent.getInstance().getImage(), 80,80,80,80);
+    }
+
     public static void main(String[] argc) {
         Scanner s = new Scanner(System.in);
         BattleField battleField = new BattleField(10,16);
@@ -76,7 +94,7 @@ public class BattleField {
                 case "7":   monsters.arrow(battleField); break;
                 default:    end = true;
             }
-            if(!end) battleField.display();
+            //if(!end) battleField.display(g);
         }
     }
 }

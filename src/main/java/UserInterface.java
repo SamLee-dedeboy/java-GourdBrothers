@@ -3,7 +3,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import javafx.scene.canvas.Canvas;
+import java.awt.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,40 +27,48 @@ public class UserInterface extends Application {
     private int rightWidth = 300;
     private int width = n * Block_length + rightWidth;  //1480
     private int height = m * Block_length;      //800
-    @Override
-    public void init() {
-        GameLauncher.initialize();
-    }
+    private Image background = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg");
     @Override
     public void start(Stage primaryStage) {
-        //
-        //create battlefield
-        //
-
-        ExecutorService exec = Executors.newCachedThreadPool();
-        exec.execute(new Grandpa());
-        exec.shutdown();
 
         //
-        //create scene
+        //create Canvas
         //
+        Canvas gameView = new Canvas(width,height);
 
+        //
+        //GraphicsContext
+        //
+        GraphicsContext g = gameView.getGraphicsContext2D();
+
+        //
+        //background
+        //
+        g.drawImage(background,0,0,width - rightWidth, height);
+
+        //
         //border
+        //
         BorderPane border = new BorderPane();
         border.setRight(addVBox());
         border.setCenter(addGridPane());
-        //background
-        BackgroundImage background = new BackgroundImage(new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg"),
-                                                         BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                                                         BackgroundPosition.DEFAULT,
-                                                         new BackgroundSize(width - rightWidth, height,
-                                                                 false,false,true,false));
-        border.setBackground(new Background(background));
+        border.getChildren().addAll(gameView);
 
+        //
+        //battlefield
+        //
+        BattleField battleField = new BattleField(m,n);
+
+        //
+        //Heros and Monsters
+        //
+        Heros heors = new Heros();
+        Monster monster = new Monster();
+        heors.snake(battleField);
+        battleField.display(g);
         //scene
         Scene scene = new Scene(border, width, height);
         primaryStage.setScene(scene);
-        primaryStage.show();
         primaryStage.show();
            /* try {
                 wait(1000);
@@ -70,14 +81,15 @@ public class UserInterface extends Application {
 
     }
 
-
     public GridPane addGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(0);
         grid.setVgap(0);
 
         grid.setGridLinesVisible(true);
-        grid.setPadding(new Insets(0, 0, 0, 0));
+        grid.setPadding(new javafx.geometry.Insets(0, 0, 0, 0));
+        //invalidate
+        grid.setHgap(0);
             /*
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
@@ -109,7 +121,7 @@ public class UserInterface extends Application {
         vbox.setSpacing(10);
         vbox.setStyle("-fx-background-color: #336699;");
 
-        Button buttonCurrent = new Button("Current");
+        javafx.scene.control.Button buttonCurrent = new javafx.scene.control.Button("Current");
         buttonCurrent.setPrefSize(100, 20);
         buttonCurrent.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
@@ -118,7 +130,7 @@ public class UserInterface extends Application {
             }
         });
 
-        Button buttonProjected = new Button("Projected");
+        javafx.scene.control.Button buttonProjected = new Button("Projected");
         buttonProjected.setPrefSize(100, 20);
 
         //vbox.setMargin(buttonProjected, new Insets(0,200,0,0));
@@ -126,6 +138,7 @@ public class UserInterface extends Application {
 
         return vbox;
     }
+
 
     public static void main(String[] args) {
         launch(args);
