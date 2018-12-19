@@ -27,49 +27,76 @@ public class UserInterface extends Application {
     private int rightWidth = 300;
     private int width = n * Block_length + rightWidth;  //1480
     private int height = m * Block_length;      //800
-    private Image background = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg");
+    //private Image background = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg");
+    private BattleField battleField;
+    private Heros heros;
+    private Monster monster;
+    private static Canvas gameView;
+    private static GraphicsContext g;
     @Override
     public void start(Stage primaryStage) {
 
         //
         //create Canvas
         //
-        Canvas gameView = new Canvas(width,height);
+        gameView = new Canvas(width - rightWidth,height);
 
         //
         //GraphicsContext
         //
-        GraphicsContext g = gameView.getGraphicsContext2D();
+        g = gameView.getGraphicsContext2D();
+
 
         //
-        //background
-        //
-        g.drawImage(background,0,0,width - rightWidth, height);
-
-        //
-        //border
+        //border and background
         //
         BorderPane border = new BorderPane();
-        border.setRight(addVBox());
-        border.setCenter(addGridPane());
-        border.getChildren().addAll(gameView);
+        Background background = new Background(new BackgroundImage(
+                                                    new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg"),
+                                                    null, null, BackgroundPosition.DEFAULT,
+                                                    new BackgroundSize(width - rightWidth, height,
+                                                                false,false, false,false)));
 
+        border.setRight(addVBox());
+        border.setBackground(background);
+        //border.setCenter(addGridPane());
+        border.getChildren().add(gameView);
+
+        //
+        //GameController
+        GameController.getInstance();
+        GameController.Gaming = true;
+        //
         //
         //battlefield
         //
-        BattleField battleField = new BattleField(m,n);
+        BattleField.getInstance();
+
+
 
         //
         //Heros and Monsters
         //
-        Heros heors = new Heros();
-        Monster monster = new Monster();
-        heors.snake(battleField);
-        battleField.display(g);
+        heros = new Heros();
+        monster = new Monster();
+        heros.snake();
+        BattleField.display(g);
+
+        //
+        //Execute Threads
+        //
+        ExecutorService exec = Executors.newCachedThreadPool();
+        exec.execute(Grandpa.getInstance());
+        exec.execute(heros.gourdBrothers.get(1));
+        exec.execute(heros.gourdBrothers.get(3));
+        exec.execute(heros.gourdBrothers.get(4));
+        exec.shutdown();
+
         //scene
         Scene scene = new Scene(border, width, height);
         primaryStage.setScene(scene);
         primaryStage.show();
+
            /* try {
                 wait(1000);
                 border.setCenter(addGridPane(battleField));
@@ -80,16 +107,19 @@ public class UserInterface extends Application {
             */
 
     }
-
+    public static GraphicsContext getMyGraphicContext() {
+        if(g == null)
+            g = gameView.getGraphicsContext2D();
+        return g;
+    }
     public GridPane addGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(0);
         grid.setVgap(0);
 
         grid.setGridLinesVisible(true);
-        grid.setPadding(new javafx.geometry.Insets(0, 0, 0, 0));
-        //invalidate
-        grid.setHgap(0);
+        grid.setPadding(new javafx.geometry.Insets(0, 100, 0, 100));
+
             /*
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
@@ -121,20 +151,33 @@ public class UserInterface extends Application {
         vbox.setSpacing(10);
         vbox.setStyle("-fx-background-color: #336699;");
 
-        javafx.scene.control.Button buttonCurrent = new javafx.scene.control.Button("Current");
-        buttonCurrent.setPrefSize(100, 20);
-        buttonCurrent.setOnAction(new EventHandler<ActionEvent>() {
+        //
+        //button snake
+        //
+
+        Button buttonSnake = new Button("Snake");
+        buttonSnake.setPrefSize(100, 100);
+        buttonSnake.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
             public void handle(ActionEvent event) {
-                System.out.println("current");
+                monster.snake();
+                BattleField.display(gameView.getGraphicsContext2D());
             }
         });
 
-        javafx.scene.control.Button buttonProjected = new Button("Projected");
-        buttonProjected.setPrefSize(100, 20);
-
-        //vbox.setMargin(buttonProjected, new Insets(0,200,0,0));
-        vbox.getChildren().addAll(buttonCurrent,buttonProjected);
+        //
+        //button crane
+        //
+        Button buttonCrane = new Button("Crane");
+        buttonCrane.setPrefSize(100, 100);
+        buttonCrane.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.crane();
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        vbox.getChildren().addAll(buttonSnake, buttonCrane);
 
         return vbox;
     }

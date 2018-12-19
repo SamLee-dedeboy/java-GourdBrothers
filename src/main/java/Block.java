@@ -8,6 +8,7 @@ public class Block <T extends Organism>{
     }
 
     public void set(T being){ this.being = being; }
+    public void setNull() { this.being = null; }
     public T getBeing(){ return this.being; }
     public int getX() { return this.x; }
     public int getY() { return this.y; }

@@ -16,38 +16,40 @@ public class Monster extends Group {
     }
     public void reformate(){
         for(int i = 0; i < num_of_minion; i++){
-            minions.get(i).fallBack();
+                minions.get(i).fallBack();
         }
         SERPENT.fallBack();
         SCORPION.fallBack();
     }
-    public void snake(BattleField battleField){
+    public void snake(){
         reformate();
-        int length = battleField.getWidth();
+        int height = BattleField.getHeight();
+        int width = BattleField.getWidth();
         int n = 6;
-        SCORPION.moveTo(battleField.at(length / 2 , length * 3 / 4));
+        SCORPION.moveTo(BattleField.at(height / 2 , width * 3 / 4));
         for(int i = 0; i < n; i++) {
             if (i < n / 2) {
-                minions.get(i).moveTo(battleField.at(length / 2 - n / 2 + i, length * 3 / 4));
+                minions.get(i).moveTo(BattleField.at(height / 2 - n / 2 + i, width * 3 / 4));
             } else {
-                minions.get(i).moveTo(battleField.at(length / 2 - n / 2 + i + 1, length * 3 / 4));
+                minions.get(i).moveTo(BattleField.at(height / 2 - n / 2 + i + 1, width * 3 / 4));
             }
         }
-        SERPENT.moveTo(battleField.at(length/2, length - 1));
+        SERPENT.moveTo(BattleField.at(height/2, width - 1));
     }
-    public void crane(BattleField battleField){
+    public void crane(){
         reformate();
         int n = 6;
-        int length = battleField.getWidth();
-        SCORPION.moveTo(battleField.at(length/2, length*3/4));
+        int width = BattleField.getWidth();
+        int height = BattleField.getHeight();
+        SCORPION.moveTo(BattleField.at(height/2, width*3/4));
         for(int i = 0; i < n; i++) {
             if (i + 1 <= (n + 1)/2) {
-                minions.get(i).moveTo(battleField.at(length/2 - n/2 + i,length*3/4 - n/2 + i));
+                minions.get(i).moveTo(BattleField.at(height/2 - n/2 + i,width*3/4 - n/2 + i));
             } else {
-                minions.get(i).moveTo(battleField.at(length/2 - n/2 + i + 1,length*3/4 - n/2 - (i - (n+1)/2) + 2));
+                minions.get(i).moveTo(BattleField.at(height/2 - n/2 + i + 1,width*3/4 - n/2 - (i - (n+1)/2) + 2));
             }
         }
-        SERPENT.moveTo(battleField.at(length/2,length - 1));
+        SERPENT.moveTo(BattleField.at(height/2,width - 1));
     }
     public void wildGoose(BattleField battleField){
         int n = 6;
