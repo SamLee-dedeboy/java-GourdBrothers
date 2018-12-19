@@ -86,9 +86,9 @@ public class UserInterface extends Application {
         //
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.execute(Grandpa.getInstance());
-        exec.execute(heros.gourdBrothers.get(1));
-        exec.execute(heros.gourdBrothers.get(3));
-        exec.execute(heros.gourdBrothers.get(4));
+        for(int i = 0; i < 7; i++) {
+            exec.execute(heros.gourdBrothers.get(i));
+        }
         exec.shutdown();
 
         //scene
@@ -119,44 +119,23 @@ public class UserInterface extends Application {
 
         grid.setGridLinesVisible(true);
         grid.setPadding(new javafx.geometry.Insets(0, 100, 0, 100));
-
-            /*
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    ImageView blockImage = new ImageView();
-                    if(battleField.at(j, i).get() != null) {
-                        blockImage.setImage(battleField.at(j, i).get().getImage());
-                        blockImage.setFitWidth(Block_length);
-                        blockImage.setFitHeight(Block_length);
-                        grid.add(blockImage, i, j);
-                    }
-             */
-
-//                    ImageView huluwa = new ImageView();
-//                    huluwa.setImage(new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg"));
-//                    huluwa.setFitHeight(Block_length);
-//                    huluwa.setFitWidth(Block_length);
-//                    grid.add(huluwa, 5, 5);
-
-
-
-
         return grid;
     }
 
     //right bar
     public VBox addVBox() {
+        int buttonHeight = 90;
+        int buttonWidth = 120;
         VBox vbox = new VBox();
-        vbox.setPadding(new Insets(0,100,0,100));
+        vbox.setPadding(new Insets(0,(rightWidth-buttonWidth)/2,0,(rightWidth-buttonWidth)/2));
         vbox.setSpacing(10);
         vbox.setStyle("-fx-background-color: #336699;");
-
         //
         //button snake
         //
 
         Button buttonSnake = new Button("Snake");
-        buttonSnake.setPrefSize(100, 100);
+        buttonSnake.setPrefSize(buttonWidth, buttonHeight);
         buttonSnake.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
             public void handle(ActionEvent event) {
@@ -170,7 +149,7 @@ public class UserInterface extends Application {
         //button crane
         //
         Button buttonCrane = new Button("Crane");
-        buttonCrane.setPrefSize(100, 100);
+        buttonCrane.setPrefSize(buttonWidth, buttonHeight);
         buttonCrane.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
             public void handle(ActionEvent event) {
@@ -179,7 +158,95 @@ public class UserInterface extends Application {
                 BattleField.display(gameView.getGraphicsContext2D());
             }
         });
-        vbox.getChildren().addAll(buttonSnake, buttonCrane);
+
+        //
+        //button wildGoose
+        //
+        Button buttonWildGoose = new Button("WildGoose");
+        buttonWildGoose.setPrefSize(buttonWidth, buttonHeight);
+        buttonWildGoose.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.wildGoose();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        //
+        //button yoke
+        //
+        Button buttonYoke = new Button("Yoke");
+        buttonYoke.setPrefSize(buttonWidth, buttonHeight);
+        buttonYoke.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.yoke();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        //
+        //button scale
+        //
+        Button buttonScale = new Button("Scale");
+        buttonScale.setPrefSize(buttonWidth, buttonHeight);
+        buttonScale.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.scale();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        //
+        //button diamond
+        //
+        Button buttonDiamond = new Button("Diamond");
+        buttonDiamond.setPrefSize(buttonWidth, buttonHeight);
+        buttonDiamond.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.diamond();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        //
+        //button crescent
+        //
+        Button buttonCrescent = new Button("Crescent");
+        buttonCrescent.setPrefSize(buttonWidth, buttonHeight);
+        buttonCrescent.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.crescent();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+        //
+        //button arrow
+        //
+        Button buttonArrow = new Button("Arrow");
+        buttonArrow.setPrefSize(buttonWidth, buttonHeight);
+        buttonArrow.setOnAction(new EventHandler<ActionEvent>() {
+            //@Override
+            public void handle(ActionEvent event) {
+                monster.arrow();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+
+                BattleField.display(gameView.getGraphicsContext2D());
+            }
+        });
+
+        vbox.getChildren().addAll(buttonSnake,
+                                  buttonCrane,
+                                  buttonWildGoose,
+                                  buttonYoke,
+                                  buttonScale,
+                                  buttonDiamond,
+                                  buttonCrescent,
+                                  buttonArrow);
 
         return vbox;
     }

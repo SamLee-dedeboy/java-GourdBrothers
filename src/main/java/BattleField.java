@@ -61,21 +61,21 @@ public class BattleField {
         }
     }
 
-    public static void display(GraphicsContext g) {
+    public static synchronized void display(GraphicsContext g) {
 
-            //g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
-            /*
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    if (field.get(i).get(j).getBeing() == null) {
-                        System.out.print("[ ] ");
-                    } else {
-                        System.out.print(field.get(i).get(j).getBeing().tellName() + " ");
-                    }
-                }
-                System.out.print("\n");
-            }
-            */
+        //g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
+//            synchronized (getInstance()) {
+////                for (int i = 0; i < height; i++) {
+////                    for (int j = 0; j < width; j++) {
+////                        if (field.get(i).get(j).getBeing() == null) {
+////                            System.out.print("[ ] ");
+////                        } else {
+////                            System.out.print(field.get(i).get(j).getBeing().tellName() + " ");
+////                        }
+////                    }
+////                    System.out.print("\n");
+////                }
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if ((at(i, j)).getBeing() != null) {
@@ -84,8 +84,8 @@ public class BattleField {
                 }
             }
         }
-
     }
+
     public void drawTest(GraphicsContext g) {
         g.drawImage(Serpent.getInstance().getImage(), 80,80,80,80);
     }

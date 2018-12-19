@@ -16,6 +16,7 @@ public abstract class Organism {
     void fallBack() {
         if(position != null)
             position.setNull();
+        position = null;
     }
     public abstract String tellName();
     public abstract Image getImage();

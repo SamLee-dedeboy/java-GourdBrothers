@@ -2,10 +2,10 @@
 public abstract class Group implements  Formations  {
     public abstract void snake();
     public abstract void crane();
-    public abstract void wildGoose(BattleField field);
-    public abstract void yoke(BattleField field);
-    public abstract void scale(BattleField field);
-    public abstract void diamond(BattleField field);
-    public abstract void crescent(BattleField field);
-    public abstract void  arrow(BattleField field);
+    public abstract void wildGoose();
+    public abstract void yoke();
+    public abstract void scale();
+    public abstract void diamond();
+    public abstract void crescent();
+    public abstract void  arrow();
 }

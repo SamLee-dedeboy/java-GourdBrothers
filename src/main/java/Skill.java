@@ -17,7 +17,7 @@ public class Skill {
         String imagePath = "file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\";
         this.user = user;
         if (user instanceof Gourd) {
-            if (((Gourd) user).tellRank() == 1)
+            if (((Gourd) user).tellRank() == 1 || ((Gourd) user).tellRank() == 5)
                 this.skillRange = 1;
             else
                 this.skillRange = 3;
@@ -36,6 +36,18 @@ public class Skill {
     public void useSkill(int x, int y) throws Exception {
         if (user instanceof Gourd) {
             switch (((Gourd) user).gourd) {
+                case RED:
+                    punch(x, y);
+                    display(UserInterface.getMyGraphicContext(), x, y);
+                    break;
+                case ORANGE:
+                    laser(x, y);
+                    displayMovement(UserInterface.getMyGraphicContext(), x, y);
+                    break;
+                case YELLOW:
+                    wall(x,y);
+                    display(UserInterface.getMyGraphicContext(),x,y);
+                    break;
                 case GREEN:
                     fire(x, y);
                     display(UserInterface.getMyGraphicContext(), x, y);
@@ -44,13 +56,26 @@ public class Skill {
                     water(x, y);
                     display(UserInterface.getMyGraphicContext(), x, y);
                     break;
-                case ORANGE:
-                    laser(x, y);
+                case BLUE:
+                    illusion(x, y);
                     displayMovement(UserInterface.getMyGraphicContext(), x, y);
                     break;
-
+                case PURPLE:
+                    absorb(x,y);
+                    display(UserInterface.getMyGraphicContext(), x, y);
             }
         }
+    }
+    private void punch(int x, int y) {
+        //TODO
+
+    }
+
+    private void laser(int x, int y) {
+        //TODO
+    }
+    private void wall(int x, int y) {
+        //TODO
     }
     private void fire(int x, int y) {
         //TODO
@@ -59,10 +84,15 @@ public class Skill {
 
     private void water(int x, int y) {
         //TODO
-    }
 
-    private void laser(int x, int y) {
+    }
+    private void illusion(int x, int y) {
         //TODO
+
+    }
+    private void absorb(int x, int y) {
+        //TODO
+
     }
     private void setBlockUsingSkill(int x, int y, boolean flag) {
         for(int i = y; i <= y + skillRange; i++)
@@ -81,11 +111,11 @@ public class Skill {
             setBlockUsingSkill(x,y - 1,false);
             for (int i = y; i < y + skillRange; i++) {
                 if (BattleField.at(x, i).getBeing() != null) {
-                    BattleField.display(g);
+                    //BattleField.display(g);
                     break;
                 }
             }
-            //BattleField.display(g);
+            BattleField.display(g);
         });
 
     }
@@ -107,7 +137,7 @@ public class Skill {
             Platform.runLater(() -> {
                 g.clearRect(final_cur_Y * Block.size, final_cur_X * Block.size, skillWidth, skillHeight);
                 setBlockUsingSkill(x,y,false);
-                if (BattleField.at(final_cur_X, final_cur_Y).getBeing() != null)
+                if (BattleField.at(final_cur_X, final_cur_Y).getBeing() != null);
                     BattleField.display(g);
             });
             cur_Y++;

@@ -62,7 +62,8 @@ public class Gourd extends Organism implements Runnable {
     public void run() {
         try {
             while(GameController.Gaming) {
-                TimeUnit.MILLISECONDS.sleep(1000);
+                int waitTime = (int)(1000 + Math.random()*(500+1));
+                TimeUnit.MILLISECONDS.sleep(waitTime);
                 skill.useSkill(position.getX(), position.getY() + 1);
 
 

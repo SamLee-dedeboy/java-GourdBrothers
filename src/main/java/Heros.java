@@ -30,30 +30,26 @@ public class Heros extends Group {
         grandpa.moveTo(BattleField.at(length/2,0));
     }
 
-    public void wildGoose(BattleField battleField){
-        int length = battleField.getWidth();
+    public void wildGoose(){
+        int length = BattleField.getWidth();
         for(int i = 0; i < n; i++) {
-            gourdBrothers.get(i).moveTo(battleField.at(length/2 - n/2 + i, length/4 - n/2 + n - i - 1));
+            gourdBrothers.get(i).moveTo(BattleField.at(length/2 - n/2 + i, length/4 - n/2 + n - i - 1));
         }
     }
 
 
-    public void yoke(BattleField battleField){
+    public void yoke(){
         ;
     }
-    public void scale(BattleField battleField){
+    public void scale(){
         ;
     }
-    public void diamond(BattleField battleField){
+    public void diamond(){
         ;
     }
-    public void crescent(BattleField battleField){
+    public void crescent(){
         ;
     }
-    public void arrow(BattleField battleField){
-        for(int i = 0; i < n; i++){
-;           ;
-        }
-    }
+    public void arrow(){ ; }
 
 }

@@ -27,8 +27,8 @@ public class Grandpa extends Organism implements Runnable {
 
         while (GameController.Gaming) {
             try {
-                TimeUnit.MILLISECONDS.sleep(200);
-                moveForward();
+                //TimeUnit.MILLISECONDS.sleep(200);
+                //moveForward();
             } catch (Exception e) {
                 e.printStackTrace();
             }
