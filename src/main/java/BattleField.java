@@ -81,7 +81,6 @@ public class BattleField {
                 if ((at(i, j)).getBeing() != null) {
                     g.drawImage(at(i, j).getBeing().getImage(),
                             j * Block.size, i * Block.size, Block.size, Block.size);
-                    at(i,j).getBeing().
                 }
             }
         }

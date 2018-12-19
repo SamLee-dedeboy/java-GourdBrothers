@@ -2,12 +2,11 @@ import javafx.scene.image.Image;
 
 public abstract class Organism {
     public enum enumGroup { HERO, MONSTER };
-    public abstract class Skill {
 
-    }
     public enumGroup group;
     public Block position;
     public Image image;
+    public Skill skill;
     void  moveTo(Block b) {
         if(this.position != null)
             this.position.setNull();

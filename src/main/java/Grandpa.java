@@ -27,7 +27,7 @@ public class Grandpa extends Organism implements Runnable {
 
         while (GameController.Gaming) {
             try {
-                TimeUnit.MILLISECONDS.sleep(700);
+                TimeUnit.MILLISECONDS.sleep(200);
                 moveForward();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -55,8 +55,15 @@ public class Grandpa extends Organism implements Runnable {
         Platform.runLater(() -> {
             GraphicsContext g = UserInterface.getMyGraphicContext();
             g.clearRect(oldPosition_Y * Block.size, oldPosition_X * Block.size, Block.size, Block.size);
-            g.drawImage(getImage(), final_nextPosition_Y * Block.size, nextPosition_X * Block.size,
-                    Block.size, Block.size);
+            if(BattleField.at(oldPosition_X,oldPosition_Y).getUsingSkillBeing() != null)
+                g.drawImage(BattleField.at(oldPosition_X,oldPosition_Y).getUsingSkillBeing().skill.getSkillImage(),
+                        (BattleField.at(oldPosition_X,oldPosition_Y).getUsingSkillBeing().position.getY() + 1) * Block.size,
+                        BattleField.at(oldPosition_X,oldPosition_Y).getUsingSkillBeing().position.getX() * Block.size,
+                        BattleField.at(oldPosition_X,oldPosition_Y).getUsingSkillBeing().skill.skillRange*Block.size,
+                            Block.size);
+            g.drawImage(getImage(),
+                     final_nextPosition_Y * Block.size,nextPosition_X * Block.size,
+                        Block.size,Block.size);
         });
     }
     public String tellName(){ return name; }
