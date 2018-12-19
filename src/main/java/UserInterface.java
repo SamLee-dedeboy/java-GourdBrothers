@@ -60,8 +60,7 @@ public class UserInterface extends Application {
         border.setRight(addVBox());
         border.setBackground(background);
         //border.setCenter(addGridPane());
-        border.getChildren().add(gameView);
-
+        border.getChildren().addAll(gameView);
         //
         //GameController
         GameController.getInstance();
@@ -112,6 +111,7 @@ public class UserInterface extends Application {
             g = gameView.getGraphicsContext2D();
         return g;
     }
+
     public GridPane addGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(0);
@@ -161,6 +161,7 @@ public class UserInterface extends Application {
             //@Override
             public void handle(ActionEvent event) {
                 monster.snake();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
                 BattleField.display(gameView.getGraphicsContext2D());
             }
         });
@@ -174,6 +175,7 @@ public class UserInterface extends Application {
             //@Override
             public void handle(ActionEvent event) {
                 monster.crane();
+                g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
                 BattleField.display(gameView.getGraphicsContext2D());
             }
         });

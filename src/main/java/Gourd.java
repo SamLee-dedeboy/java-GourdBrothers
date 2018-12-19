@@ -70,26 +70,18 @@ public class Gourd extends Organism implements Runnable {
                 });
 
                 TimeUnit.MILLISECONDS.sleep(1000);
-                //store covered Being
-                ArrayList<Block> coveredBlock = new ArrayList<>();
-                for (int i = y; i < y + skillRange; i++) {
-                    if (BattleField.at(x, i).getBeing() != null) {
-                        coveredBlock.add(BattleField.at(x, i));
-                    }
-                }
+
                 Platform.runLater(() -> {
                     g.clearRect(y * Block.size, x * Block.size, skillWidth, skillHeight);
-
-                    //restore covered Being
-                    for (Block b : coveredBlock) {
-                        if (b.getBeing() != null) {
-
-                            g.drawImage(b.getBeing().getImage(),
-                                    b.getY() * Block.size, b.getX() * Block.size,
-                                    Block.size, Block.size);
+                    for(int i = y; i < y + skillRange; i++){
+                        if(BattleField.at(x,i).getBeing()!= null) {
+                            BattleField.display(g);
+                            break;
                         }
                     }
+                    //BattleField.display(g);
                 });
+
             }
             private void displayMovement(GraphicsContext g, int x, int y) throws Exception {
                 int cur_X = x;
@@ -98,31 +90,18 @@ public class Gourd extends Organism implements Runnable {
                     final int final_cur_X = cur_X;
                     final int final_cur_Y = cur_Y;
                     Platform.runLater(() -> {
+                        //g.save();
                         g.drawImage(skillImage, final_cur_Y * Block.size, final_cur_X * Block.size, skillWidth, skillHeight);
                     });
 
                     TimeUnit.MILLISECONDS.sleep(500);
-                    //store covered Being
-                    ArrayList<Block> coveredBlock = new ArrayList<>();
-                    for (int i = cur_Y; i < cur_Y + skillRange && i < BattleField.getWidth(); i++) {
-                        if (BattleField.at(cur_X, i).getBeing() != null) {
-                            coveredBlock.add(BattleField.at(cur_X, i));
-                        }
-                    }
+
                     Platform.runLater(() -> {
                         g.clearRect(final_cur_Y * Block.size, final_cur_X * Block.size, skillWidth, skillHeight);
+                        if(BattleField.at(final_cur_X, final_cur_Y).getBeing()!= null)
+                            BattleField.display(g);
                     });
                     cur_Y++;
-                    //restore covered Being
-                    for (Block b : coveredBlock) {
-                        if (b.getBeing() != null) {
-                            Platform.runLater(() -> {
-                                g.drawImage(b.getBeing().getImage(),
-                                        b.getY() * Block.size, b.getX() * Block.size,
-                                        Block.size, Block.size);
-                            });
-                        }
-                    }
                 }
             }
         }
