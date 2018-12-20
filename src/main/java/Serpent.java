@@ -12,6 +12,17 @@ public class Serpent extends Organism {
         }
         return instance;
     }
+    public void run () {
+
+        while (GameController.Gaming) {
+            try {
+                //TimeUnit.MILLISECONDS.sleep(200);
+                //moveForward();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public String tellName(){ return name; }
     public Image getImage(){ return image; }
     public void cheers() {

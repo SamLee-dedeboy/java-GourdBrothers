@@ -11,6 +11,9 @@ public class Block <T extends Organism>{
 
     public void set(T being){ this.being = being; }
     public void setNull() { this.being = null; }
+    public void setUsingSkill(boolean flag) {
+        usingSkill = flag;
+    }
     public void setUsingSkill(boolean flag, T skillUsingBeing) {
         usingSkill = flag;
         if(flag)

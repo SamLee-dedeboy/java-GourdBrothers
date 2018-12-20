@@ -89,6 +89,10 @@ public class UserInterface extends Application {
         for(int i = 0; i < 7; i++) {
             exec.execute(heros.gourdBrothers.get(i));
         }
+        monster.snake();
+        for(int i = 0; i < monster.num_of_minion; i++) {
+            exec.execute(Monster.minions.get(i));
+        }
         exec.shutdown();
 
         //scene
