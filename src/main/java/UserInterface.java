@@ -33,6 +33,7 @@ public class UserInterface extends Application {
     private Monster monster;
     private static Canvas gameView;
     private static GraphicsContext g;
+    public static ExecutorService exec;
     @Override
     public void start(Stage primaryStage) {
 
@@ -84,7 +85,8 @@ public class UserInterface extends Application {
         //
         //Execute Threads
         //
-        ExecutorService exec = Executors.newCachedThreadPool();
+        exec = Executors.newCachedThreadPool();
+
         exec.execute(Grandpa.getInstance());
         for(int i = 0; i < 7; i++) {
             exec.execute(heros.gourdBrothers.get(i));
@@ -93,7 +95,7 @@ public class UserInterface extends Application {
         for(int i = 0; i < monster.num_of_minion; i++) {
             exec.execute(Monster.minions.get(i));
         }
-        exec.shutdown();
+        //exec.shutdown();
 
         //scene
         Scene scene = new Scene(border, width, height);

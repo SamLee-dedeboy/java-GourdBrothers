@@ -6,7 +6,7 @@ public class Monster extends Group {
     static ArrayList<Minion> minions;
     int num_of_minion;
     Monster() {
-        num_of_minion = 100;
+        num_of_minion = 20;
         SCORPION = new Scorpion();
         SERPENT = new Serpent();
         minions = new ArrayList<>(Arrays.asList(new Minion[num_of_minion]));

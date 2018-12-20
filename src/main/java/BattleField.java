@@ -11,7 +11,7 @@ public class BattleField {
     private static int width = Constants.n;
     private static BattleField instance = null;
 
-    private static ArrayList<ArrayList <Block>> field;
+    private volatile static ArrayList<ArrayList <Block>> field;
     private BattleField(int m, int n) {
         field = new ArrayList<>(n);
         for(int i = 0; i < m; i++){
@@ -32,8 +32,10 @@ public class BattleField {
         }
         return instance;
     }
-
-    public static Block at(int x, int y) {
+    public synchronized  static void setBeing(Organism being, int x, int y) {
+        field.get(x).get(y).set(being);
+    }
+    public synchronized static Block at(int x, int y) {
         return field.get(x).get(y);
     }
 
@@ -42,7 +44,7 @@ public class BattleField {
     public static int getWidth() { return width; }
     public static int getHeight() {return height; }
 
-    public static boolean collide (int x, int y) {
+    public synchronized static boolean collide (int x, int y) {
         return (at(x,y).getBeing() != null);
     }
     public static boolean hasEnemy(Organism.enumGroup myGroup, int x, int y, int range) {
@@ -60,7 +62,18 @@ public class BattleField {
             }
         }
     }
-
+    public static void print() {
+        for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) {
+                       if (field.get(i).get(j).getBeing() == null) {
+                            System.out.print("[ ] ");
+                       } else {
+                            System.out.print(field.get(i).get(j).getBeing().tellName() + " ");
+                        }
+                    }
+                    System.out.print("\n");
+                }
+    }
     public static synchronized void display(GraphicsContext g) {
 
         //g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
