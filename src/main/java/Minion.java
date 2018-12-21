@@ -11,24 +11,24 @@ public class Minion extends Organism {
     public String tellName() { return this.name; }
     public Image getImage() { return this.image; }
     public void run() {
-        int i = 0;
+
         while (GameController.Gaming) {
             while (position.getY() > 0) {
-                i++;
                 try {
                     if (!isDead()) {
+                        if(!GameController.Gaming)
+                            break;
                         moveForward();
-                        int waitTime = (int) (2000 + Math.random() * (1000 + 1));
+                        int waitTime = (int) (1500 + Math.random() * (2000 + 1));
                         TimeUnit.MILLISECONDS.sleep(waitTime);
-                        //System.out.println("walking! - " + i);
                     }
                     else
                         break;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
-            //setDead(true);
         }
     }
     public void moveForward() {
@@ -44,8 +44,6 @@ public class Minion extends Organism {
                     nextPosition_Y--;
             }
             this.moveTo(BattleField.at(nextPosition_X, nextPosition_Y));
-
-
             //
             //display movement
             //
@@ -53,6 +51,8 @@ public class Minion extends Organism {
             Platform.runLater(() -> {
                 GraphicsContext g = UserInterface.getMyGraphicContext();
                 g.clearRect(oldPosition_Y * Block.size, oldPosition_X * Block.size, Block.size, Block.size);
+
+                //repaint covered unflying skill
                 if (BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing() != null)
                     g.drawImage(BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().skill.getSkillImage(),
                             (BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().position.getY() + 1) * Block.size,
@@ -69,6 +69,5 @@ public class Minion extends Organism {
     }
     private void killBeing(int x, int y) {
         BattleField.at(x,y).getBeing().setDead(true);
-
     }
 }

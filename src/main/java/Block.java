@@ -14,6 +14,7 @@ public class Block <T extends Organism>{
     public void setUsingSkill(boolean flag) {
         usingSkill = flag;
     }
+
     public void setUsingSkill(boolean flag, T skillUsingBeing) {
         usingSkill = flag;
         if(flag)

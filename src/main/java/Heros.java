@@ -1,15 +1,36 @@
 import java.util.*;
 public class Heros extends Group {
-    private int n;
-    //private Gourd[] gourdBrothers;
-    public ArrayList<Gourd> gourdBrothers;
-    private Grandpa grandpa;
-    Heros(){
+    private static Heros instance;
+    private static int n;
+
+    public static ArrayList<Gourd> gourdBrothers;
+    private static Grandpa grandpa = Grandpa.getInstance();
+    public synchronized static Heros getInstance() {
+        if(instance == null)
+            instance = new Heros();
+        return instance;
+    }
+    private Heros(){
         gourdBrothers = new ArrayList<>(Arrays.asList(Gourd.values()));
         grandpa = Grandpa.getInstance();
         n = 7;
     }
-
+    public static boolean AllDead() {
+        if(grandpa.isDead()) {
+            for(int i = 0; i < 7; i++) {
+                if(!gourdBrothers.get(i).isDead())
+                    return false;
+            }
+            return true;
+        }
+        return  false;
+    }
+    public static void stopAllThreads() {
+        for(int i = 0; i < 7; i++) {
+            gourdBrothers.get(i).setDead(true);
+        }
+        grandpa.setDead(true);
+    }
     public void snake() {
         int length = BattleField.getHeight();
         for(int i = 0; i < n; i++){

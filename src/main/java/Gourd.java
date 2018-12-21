@@ -1,13 +1,5 @@
-import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import javax.management.relation.RoleUnresolved;
-import java.util.*;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.sleep;
 
 public class Gourd extends Organism implements Runnable {
 
@@ -24,6 +16,7 @@ public class Gourd extends Organism implements Runnable {
         }
 
     }
+
     //
     //member variables
     //
@@ -36,6 +29,7 @@ public class Gourd extends Organism implements Runnable {
     public String tellColor() {
         return this.gourd.color;
     }
+
     public int tellRank() {
         return this.gourd.rank;
     }
@@ -43,29 +37,38 @@ public class Gourd extends Organism implements Runnable {
     public void report(int src, int dst) {
         System.out.println(this.gourd.name + ": " + src + "->" + dst);
     }
-    Gourd(int rank){
+
+    Gourd(int rank) {
         group = enumGroup.HERO;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\" + (rank + 1) +".jpg");
+        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\" + (rank + 1) + ".jpg");
         gourd = enum_Gourd.values()[rank];
         skill = new Skill(this);
     }
-    public Image getImage() { return this.image; }
 
-    public static Gourd[] values(){
+    public Image getImage() {
+        return this.image;
+    }
+
+    public static Gourd[] values() {
         Gourd[] gourdBrothers = new Gourd[7];
-        for(int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++) {
             gourdBrothers[i] = new Gourd(i);
         }
         return gourdBrothers;
     }
+
     @Override
     public void run() {
         try {
-            while(GameController.Gaming) {
-                if(!isDead()) {
-                    int waitTime = (int) (1000 + Math.random() * (500 + 1));
-                    TimeUnit.MILLISECONDS.sleep(waitTime);
-                    skill.useSkill(position.getX(), position.getY());
+            while (GameController.Gaming) {
+                if (!isDead()) {
+                    if (BattleField.hasEnemy(enumGroup.HERO, position.getX(), position.getY(), skill.skillRange)) {
+                        //System.out.println("incoming!");
+                        skill.useSkill(position.getX(), position.getY());
+                        TimeUnit.MILLISECONDS.sleep(skill.frequency);
+                    }
+
+
                 }
 
                 //attack();
@@ -74,11 +77,6 @@ public class Gourd extends Organism implements Runnable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-    private void attack()throws Exception {
-        if (BattleField.hasEnemy(group, position.getX(), position.getY(), skill.skillRange)) {
-            skill.useSkill(position.getX(), position.getY());
         }
     }
 }

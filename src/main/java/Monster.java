@@ -1,21 +1,53 @@
+
 import java.util.*;
 public class Monster extends Group {
-    static Serpent SERPENT;
-    static Scorpion SCORPION;
+    private static Monster instance;
+    public static Serpent SERPENT = Serpent.getInstance();
+    public static Scorpion SCORPION = Scorpion.getInstance();
     //static Minion[] minions;
     static ArrayList<Minion> minions;
-    int num_of_minion;
-    Monster() {
-        num_of_minion = 20;
-        SCORPION = new Scorpion();
-        SERPENT = new Serpent();
-        minions = new ArrayList<>(Arrays.asList(new Minion[num_of_minion]));
-        for(int i = 0; i < num_of_minion; i++) {
+    public static int numOfMinion;
+    private static int initialNumOfMinion = 20;
+    private static int numOfAliveMinion = initialNumOfMinion;
+
+    //
+    //Singleton
+    //
+    public synchronized static Monster getInstance() {
+        if(instance == null)
+            instance = new Monster();
+        return instance;
+    }
+    private Monster() {
+        numOfMinion = 0;
+        minions = new ArrayList<>(Arrays.asList(new Minion[initialNumOfMinion]));
+        for(int i = 0; i < initialNumOfMinion; i++) {
             minions.set(i, new Minion());
         }
     }
+
+    public static void stopAllThreads() {
+        SCORPION.setDead(true);
+        SERPENT.setDead(true);
+        for(int i = 0; i < numOfMinion; i++)
+            minions.get(i).setDead(true);
+    }
+    public static void SetMinionDead() { numOfAliveMinion --; }
+    public static boolean AllDead(){
+        return SERPENT.isDead() && SCORPION.isDead() && numOfAliveMinion < 0;
+    }
+
+    //
+    //formation related functions
+    //
     public void reformate(){
-        for(int i = 0; i < num_of_minion; i++){
+        SERPENT.setDead(false);
+        SERPENT.healthPoint = Constants.initialHealthPoint;
+        SCORPION.setDead(false);
+        SCORPION.healthPoint = Constants.initialHealthPoint;
+        for(int i = 0; i < numOfMinion; i++){
+                minions.get(i).setDead(false);
+                SERPENT.healthPoint = Constants.initialHealthPoint;
                 minions.get(i).fallBack();
         }
         SERPENT.fallBack();
@@ -25,13 +57,14 @@ public class Monster extends Group {
         reformate();
         int height = BattleField.getHeight();
         int width = BattleField.getWidth();
-        num_of_minion = 6;
+        numOfMinion = 6;
+        numOfAliveMinion = numOfMinion;
         SCORPION.moveTo(BattleField.at(height / 2 , width * 3 / 4));
-        for(int i = 0; i < num_of_minion; i++) {
-            if (i < num_of_minion / 2) {
-                minions.get(i).moveTo(BattleField.at(height / 2 - num_of_minion / 2 + i, width * 3 / 4));
+        for(int i = 0; i < numOfMinion; i++) {
+            if (i < numOfMinion / 2) {
+                minions.get(i).moveTo(BattleField.at(height / 2 - numOfMinion / 2 + i, width * 3 / 4));
             } else {
-                minions.get(i).moveTo(BattleField.at(height / 2 - num_of_minion / 2 + i + 1, width * 3 / 4));
+                minions.get(i).moveTo(BattleField.at(height / 2 - numOfMinion / 2 + i + 1, width * 3 / 4));
             }
         }
         SERPENT.moveTo(BattleField.at(height/2, width - 1));
@@ -39,7 +72,8 @@ public class Monster extends Group {
     public synchronized void crane(){
         reformate();
         int n = 6;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();
         SCORPION.moveTo(BattleField.at(height/2, width*3/4));
@@ -55,7 +89,8 @@ public class Monster extends Group {
     public synchronized void wildGoose(){
         reformate();
         int n = 6;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();
         SCORPION.moveTo(BattleField.at(height/2, width*3/4));
@@ -71,7 +106,8 @@ public class Monster extends Group {
     public synchronized void yoke(){
         reformate();
         int n = 6;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();
         SCORPION.moveTo(BattleField.at(height/2, width*3/4));
@@ -87,7 +123,8 @@ public class Monster extends Group {
     public synchronized void scale(){
         reformate();
         int n = 6;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();
         int col = 3;
@@ -104,7 +141,8 @@ public class Monster extends Group {
     public synchronized void diamond(){
         reformate();
         int n = 8;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();
         int col = 5;
@@ -133,7 +171,8 @@ public class Monster extends Group {
     public synchronized void crescent() {
         reformate();
         int n = 19;
-        num_of_minion = n;
+        numOfMinion = n;
+        numOfAliveMinion = numOfMinion;
         int col = 3;
         int cur = 0;
         int width = BattleField.getWidth();
@@ -167,10 +206,10 @@ public class Monster extends Group {
         SERPENT.moveTo(BattleField.at(height/2, width - 1));
     }
     public synchronized void arrow() {
-
             reformate();
             int n = 12;
-            num_of_minion = n;
+            numOfMinion = n;
+            numOfAliveMinion = numOfMinion;
             int col = 6;
             int cur = 0;
             int width = BattleField.getWidth();
@@ -187,7 +226,5 @@ public class Monster extends Group {
             }
             SCORPION.moveTo(BattleField.at(height / 2, width - 2));
             SERPENT.moveTo(BattleField.at(height / 2, width - 1));
-            //BattleField.display(UserInterface.getMyGraphicContext());
-
     }
 }

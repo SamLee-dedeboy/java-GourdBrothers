@@ -1,12 +1,4 @@
-import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import javax.management.relation.RoleUnresolved;
-
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.sleep;
 
 public class Grandpa extends Organism implements Runnable {
     private static Grandpa instance = null;
@@ -23,12 +15,10 @@ public class Grandpa extends Organism implements Runnable {
     }
     @Override
     public void run() {
-
-
         while (GameController.Gaming) {
             try {
-                //TimeUnit.MILLISECONDS.sleep(200);
                 //moveForward();
+                //TimeUnit.MILLISECONDS.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }

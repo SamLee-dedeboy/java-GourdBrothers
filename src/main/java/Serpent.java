@@ -12,12 +12,13 @@ public class Serpent extends Organism {
         }
         return instance;
     }
+    private Serpent(){;}
     public void run () {
 
         while (GameController.Gaming) {
             try {
-                //TimeUnit.MILLISECONDS.sleep(200);
                 //moveForward();
+                //TimeUnit.MILLISECONDS.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
