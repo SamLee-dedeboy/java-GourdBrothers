@@ -42,7 +42,7 @@ public class UserInterface extends Application {
         //
         //create Canvas
         //
-        gameView = new Canvas(width - rightWidth,height);
+        gameView = new Canvas(width - rightWidth, height);
 
         //
         //GraphicsContext
@@ -54,10 +54,10 @@ public class UserInterface extends Application {
         //
         BorderPane border = new BorderPane();
         Background background = new Background(new BackgroundImage(
-                                                    new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg"),
-                                                    null, null, BackgroundPosition.DEFAULT,
-                                                    new BackgroundSize(width - rightWidth, height,
-                                                                false,false, false,false)));
+                new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\background.jpg"),
+                null, null, BackgroundPosition.DEFAULT,
+                new BackgroundSize(width - rightWidth, height,
+                        false, false, false, false)));
         border.setRight(addVBox());
         border.setBackground(background);
         //border.setCenter(addGridPane());
@@ -82,12 +82,10 @@ public class UserInterface extends Application {
         BattleField.display(g);
 
 
-
         //scene
         Scene scene = new Scene(border, width, height);
         primaryStage.setScene(scene);
         primaryStage.show();
-
 
 
     }
@@ -104,10 +102,11 @@ public class UserInterface extends Application {
     }
 
     public static GraphicsContext getMyGraphicContext() {
-        if(g == null)
+        if (g == null)
             g = gameView.getGraphicsContext2D();
         return g;
     }
+
     public GridPane addGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(0);

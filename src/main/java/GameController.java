@@ -15,9 +15,11 @@ public class GameController {
     public static void setRoundPassed() {
         roundPassed.set(curRound, true);
     }
+
     public static void setRoundFailed() {
         roundPassed.set(curRound, false);
     }
+
     public static void handleGameEnd() {
         GraphicsContext g = UserInterface.getMyGraphicContext();
         Gaming = false;
@@ -28,32 +30,39 @@ public class GameController {
         Heros.getInstance().snake();
         BattleField.display(g);
     }
+
     public static void handleGameStart() {
         Gaming = true;
         //
         //Execute Threads
         //
         exec.execute(Grandpa.getInstance());
-        for(int i = 0; i < 7; i++) {
+        for (int i = 0; i < 7; i++) {
             exec.execute(Heros.gourdBrothers.get(i));
         }
 
-        for(int i = 0; i < Monster.numOfMinion; i++) {
+        for (int i = 0; i < Monster.numOfMinion; i++) {
             exec.execute(Monster.minions.get(i));
         }
         //exec.shutdown();
     }
 
-    public static void setCurRound(int round) { curRound = round; }
-    private GameController(){
-        for(int i = 0; i < numOfRound; i++)
+    public static void setCurRound(int round) {
+        curRound = round;
+    }
+
+    private GameController() {
+        for (int i = 0; i < numOfRound; i++)
             roundPassed.add(false);
         exec = Executors.newCachedThreadPool();
     }
 
-    public static ExecutorService getExecutor() { return exec; }
+    public static ExecutorService getExecutor() {
+        return exec;
+    }
+
     public synchronized static GameController getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new GameController();
         return instance;
     }

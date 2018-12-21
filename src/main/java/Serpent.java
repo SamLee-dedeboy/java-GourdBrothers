@@ -7,13 +7,17 @@ public class Serpent extends Organism {
     public enumGroup group = enumGroup.MONSTER;
 
     public static synchronized Serpent getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Serpent();
         }
         return instance;
     }
-    private Serpent(){;}
-    public void run () {
+
+    private Serpent() {
+        ;
+    }
+
+    public void run() {
 
         while (GameController.Gaming) {
             try {
@@ -24,8 +28,15 @@ public class Serpent extends Organism {
             }
         }
     }
-    public String tellName(){ return name; }
-    public Image getImage(){ return image; }
+
+    public String tellName() {
+        return name;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
     public void cheers() {
         //TODO
     }

@@ -3,39 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e430fa07-4f33-4ccd-ad46-bbf7ea9cfe1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BattleField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BattleField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Formations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Formations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Gourd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Gourd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grandpa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grandpa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Heros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Heros.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Minion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Organism.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Organism.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Scorpion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Scorpion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Serpent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serpent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Block.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Minion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Minion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Skill$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skill$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Skill$FlyingSkill.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skill$FlyingSkill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Skill$Illusion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skill$Illusion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Skill$Laser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skill$Laser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Skill.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UserInterface.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -140,8 +107,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2730">
-              <caret line="216" column="28" selection-start-line="216" selection-start-column="28" selection-end-line="216" selection-end-column="28" />
+            <state relative-caret-position="1767">
+              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -285,7 +252,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545385823144" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545386368716" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -351,12 +318,12 @@
       <workItem from="1545225644505" duration="15532000" />
       <workItem from="1545290500022" duration="1525000" />
       <workItem from="1545303683763" duration="11357000" />
-      <workItem from="1545358091901" duration="18458000" />
+      <workItem from="1545358091901" duration="18710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88099000" />
+    <option name="totallyTimeSpent" value="88351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -371,7 +338,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.85429144" visible="true" weight="0.28954422" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.85429144" visible="true" weight="0.28954422" />
       <window_info id="Structure" order="1" sideWeight="0.14541833" side_tool="true" weight="0.2855228" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -380,14 +347,14 @@
       <window_info id="Favorites" order="6" sideWeight="0.14570858" side_tool="true" weight="0.2855228" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31006712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31006712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986577" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32885906" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32885906" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32751676" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3261745" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32885906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -651,8 +618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UserInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2730">
-          <caret line="216" column="28" selection-start-line="216" selection-start-column="28" selection-end-line="216" selection-end-column="28" />
+        <state relative-caret-position="1767">
+          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

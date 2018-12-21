@@ -7,12 +7,16 @@ public class Scorpion extends Organism {
     public enumGroup group = enumGroup.MONSTER;
 
     public static synchronized Scorpion getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Scorpion();
         }
         return instance;
     }
-    private Scorpion() {;}
+
+    private Scorpion() {
+        ;
+    }
+
     @Override
     public void run() {
 
@@ -26,8 +30,14 @@ public class Scorpion extends Organism {
         }
     }
 
-    public String tellName(){ return name; }
-    public Image getImage(){ return image; }
+    public String tellName() {
+        return name;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
     public void cheers() {
         //TODO
     }

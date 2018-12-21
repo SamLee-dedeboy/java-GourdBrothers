@@ -16,13 +16,16 @@ public class Skill {
     private int attackPoint;
     public int frequency;
     public boolean flying = false;
-    private abstract class FlyingSkill extends Skill implements Runnable{
+
+    private abstract class FlyingSkill extends Skill implements Runnable {
         protected int cur_X, cur_Y;
         protected GraphicsContext g;
-        private FlyingSkill(Organism user)  {
+
+        private FlyingSkill(Organism user) {
             super(user);
             flying = true;
         }
+
         protected void displayFly() {
             try {
                 boolean hit = false;
@@ -46,23 +49,24 @@ public class Skill {
                     if (hit && BattleField.at(final_cur_X, final_cur_Y).getBeing() != null) {
                         Platform.runLater(() -> {
                             //System.out.println(BattleField.at(final_cur_X, final_cur_Y).getBeing().tellName());
-                            g.drawImage(BattleField.at(final_cur_X,final_cur_Y).getBeing().getImage(),
+                            g.drawImage(BattleField.at(final_cur_X, final_cur_Y).getBeing().getImage(),
                                     final_cur_Y * Block.size, final_cur_X * Block.size,
                                     Block.size, Block.size);
                         });
 
                     }
                     setBlockUsingSkill(cur_X, cur_Y, false);
-                    if(hit)
+                    if (hit)
                         break;
                     cur_Y++;
                 }
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
     private class Laser extends FlyingSkill {
 
         private Laser(int x, int y, Organism user) {
@@ -76,17 +80,20 @@ public class Skill {
             displayFly();
         }
     }
+
     private class Illusion extends FlyingSkill {
         private Illusion(int x, int y, Organism user) {
             super(user);
             cur_X = x;
             cur_Y = y;
         }
+
         @Override
         public void run() {
             displayFly();
         }
     }
+
     public Skill(Organism user) {
         String imagePath = "file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\";
         frequency = (int) (2000 + Math.random() * (2000 + 1));
@@ -95,8 +102,7 @@ public class Skill {
             if (((Gourd) user).tellRank() == 1 || ((Gourd) user).tellRank() == 5) {
                 this.skillRange = 1;
                 attackPoint = 4;
-            }
-            else {
+            } else {
                 this.skillRange = 4;
                 attackPoint = 6;
             }
@@ -107,7 +113,11 @@ public class Skill {
         skillWidth = Block.size * skillRange;
         skillHeight = Block.size;
     }
-    public int getAttackPoint() { return attackPoint; }
+
+    public int getAttackPoint() {
+        return attackPoint;
+    }
+
     public Image getSkillImage() {
         return skillImage;
     }
@@ -124,8 +134,8 @@ public class Skill {
                     //displayMovement(UserInterface.getMyGraphicContext(), x, y);
                     break;
                 case YELLOW:
-                    wall(x,y);
-                    display(UserInterface.getMyGraphicContext(),x,y + 1);
+                    wall(x, y);
+                    display(UserInterface.getMyGraphicContext(), x, y + 1);
                     break;
                 case GREEN:
                     fire(x, y);
@@ -140,39 +150,45 @@ public class Skill {
                     //displayMovement(UserInterface.getMyGraphicContext(), x, y + 1);
                     break;
                 case PURPLE:
-                    absorb(x,y);
+                    absorb(x, y);
                     display(UserInterface.getMyGraphicContext(), x, y + 1);
             }
         }
     }
+
     private void punch(int x, int y) {
-        useNormalSkill(x,y + 1);
+        useNormalSkill(x, y + 1);
 
     }
 
     private void laser(int x, int y) {
-        GameController.getExecutor().execute(new Laser(x,y + 1, this.user));
+        GameController.getExecutor().execute(new Laser(x, y + 1, this.user));
     }
+
     private void wall(int x, int y) {
-        useNormalSkill(x,y + 1);
+        useNormalSkill(x, y + 1);
     }
+
     private void fire(int x, int y) {
-        useNormalSkill(x,y + 1);
+        useNormalSkill(x, y + 1);
 
     }
 
     private void water(int x, int y) {
-        useNormalSkill(x,y + 1);
+        useNormalSkill(x, y + 1);
 
     }
+
     private void illusion(int x, int y) {
-        GameController.getExecutor().execute(new Illusion(x,y + 1,this.user));
+        GameController.getExecutor().execute(new Illusion(x, y + 1, this.user));
 
     }
+
     private void absorb(int x, int y) {
-        useNormalSkill(x,y + 1);
+        useNormalSkill(x, y + 1);
 
     }
+
     private boolean useNormalSkill(int x, int y) {
         boolean hit = false;
         for (int i = y; i < y + skillRange && i < BattleField.getWidth(); i++) {
@@ -198,17 +214,18 @@ public class Skill {
             }
         }
     }
+
     private void display(GraphicsContext g, int x, int y) throws Exception {
         Platform.runLater(() -> {
             g.drawImage(skillImage, y * Block.size, x * Block.size, skillWidth, skillHeight);
-            setBlockUsingSkill(x,y - 1,true);
+            setBlockUsingSkill(x, y - 1, true);
         });
 
         TimeUnit.MILLISECONDS.sleep(1000);
 
         Platform.runLater(() -> {
             g.clearRect(y * Block.size, x * Block.size, skillWidth, skillHeight);
-            setBlockUsingSkill(x,y - 1,false);
+            setBlockUsingSkill(x, y - 1, false);
             synchronized (BattleField.getInstance()) {
                 for (int i = y; i < y + skillRange && i < BattleField.getWidth(); i++) {
                     if (BattleField.at(x, i).getBeing() != null) {
@@ -230,16 +247,16 @@ public class Skill {
             Platform.runLater(() -> {
                 //g.save();
                 g.drawImage(skillImage, final_cur_Y * Block.size, final_cur_X * Block.size, skillWidth, skillHeight);
-                setBlockUsingSkill(x,y,true);
+                setBlockUsingSkill(x, y, true);
             });
 
             TimeUnit.MILLISECONDS.sleep(500);
 
             Platform.runLater(() -> {
                 g.clearRect(final_cur_Y * Block.size, final_cur_X * Block.size, skillWidth, skillHeight);
-                setBlockUsingSkill(x,y,false);
-                if (BattleField.at(final_cur_X, final_cur_Y).getBeing() != null);
-                    BattleField.display(g);
+                setBlockUsingSkill(x, y, false);
+                if (BattleField.at(final_cur_X, final_cur_Y).getBeing() != null) ;
+                BattleField.display(g);
             });
             cur_Y++;
         }

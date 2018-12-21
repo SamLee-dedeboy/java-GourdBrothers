@@ -8,21 +8,27 @@ public class Minion extends Organism {
     private String name = "喽啰";
     private Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\minion.jpg");
     public enumGroup group = enumGroup.MONSTER;
-    public String tellName() { return this.name; }
-    public Image getImage() { return this.image; }
+
+    public String tellName() {
+        return this.name;
+    }
+
+    public Image getImage() {
+        return this.image;
+    }
+
     public void run() {
 
         while (GameController.Gaming) {
             while (position.getY() > 0) {
                 try {
                     if (!isDead()) {
-                        if(!GameController.Gaming)
+                        if (!GameController.Gaming)
                             break;
                         moveForward();
                         int waitTime = (int) (1500 + Math.random() * (2000 + 1));
                         TimeUnit.MILLISECONDS.sleep(waitTime);
-                    }
-                    else
+                    } else
                         break;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -31,6 +37,7 @@ public class Minion extends Organism {
             }
         }
     }
+
     public void moveForward() {
         int oldPosition_X = position.getX();
         int oldPosition_Y = position.getY();
@@ -67,7 +74,8 @@ public class Minion extends Organism {
             });
         }
     }
+
     private void killBeing(int x, int y) {
-        BattleField.at(x,y).getBeing().setDead(true);
+        BattleField.at(x, y).getBeing().setDead(true);
     }
 }

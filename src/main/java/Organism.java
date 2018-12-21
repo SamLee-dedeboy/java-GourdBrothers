@@ -2,7 +2,9 @@
 import javafx.scene.image.Image;
 
 public abstract class Organism implements Runnable {
-    public enum enumGroup { HERO, MONSTER };
+    public enum enumGroup {HERO, MONSTER}
+
+    ;
 
     public enumGroup group;
     public Block position;
@@ -11,25 +13,27 @@ public abstract class Organism implements Runnable {
     public int healthPoint = Constants.initialHealthPoint;
     private boolean dead = false;
 
-    public void  moveTo(Block b) {
-        if(this.position != null)
+    public void moveTo(Block b) {
+        if (this.position != null)
             this.position.setNull();
-        BattleField.setBeing(this, b.getX(),b.getY());
+        BattleField.setBeing(this, b.getX(), b.getY());
         position = b;
     }
+
     void fallBack() {
-        if(position != null)
+        if (position != null)
             position.setNull();
         position = null;
     }
+
     public void setDead(boolean flag) {
-        if(dead && flag)    //no need to set a dead being dead again
+        if (dead && flag)    //no need to set a dead being dead again
             return;
 
         dead = flag;
         //set using skill false
-        if(dead) {
-            if(position != null) {
+        if (dead) {
+            if (position != null) {
                 Organism being = BattleField.at(position.getX(), position.getY()).getBeing();
                 if (being != null) {
                     // if(being.skill != null) {
@@ -53,12 +57,17 @@ public abstract class Organism implements Runnable {
             }
             if (Monster.AllDead())
                 GameController.setRoundPassed();
-            if(Heros.AllDead())
+            if (Heros.AllDead())
                 GameController.setRoundFailed();
         }
     }
-    public boolean isDead() { return dead; }
+
+    public boolean isDead() {
+        return dead;
+    }
+
     public abstract String tellName();
+
     public abstract Image getImage();
 
 
