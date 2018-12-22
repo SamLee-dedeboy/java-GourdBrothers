@@ -1,10 +1,11 @@
 
+import javafx.application.Platform;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Organism implements Runnable {
     public enum enumGroup {HERO, MONSTER}
 
-    ;
 
     public enumGroup group;
     public Block position;
@@ -70,5 +71,43 @@ public abstract class Organism implements Runnable {
 
     public abstract Image getImage();
 
+    public void moveForward(int direction) {
+        int oldPosition_X = position.getX();
+        int oldPosition_Y = position.getY();
+        int nextPosition_X = oldPosition_X;
+        int nextPosition_Y = oldPosition_Y + direction;
+        synchronized (BattleField.getInstance()) {
+            if (BattleField.collide(nextPosition_X, nextPosition_Y)) {
+                if (BattleField.at(nextPosition_X, nextPosition_Y).getBeing().group == enumGroup.HERO) {
+                    killBeing(nextPosition_X, nextPosition_Y);
+                } else
+                    nextPosition_Y--;
+            }
+            this.moveTo(BattleField.at(nextPosition_X, nextPosition_Y));
+            //
+            //display movement
+            //
+            int final_nextPosition_Y = nextPosition_Y;
+            Platform.runLater(() -> {
+                GraphicsContext g = GUIController.getMyGraphicContext();
+                g.clearRect(oldPosition_Y * Block.size, oldPosition_X * Block.size, Block.size, Block.size);
 
+                //repaint covered unflying skill
+                if (BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing() != null)
+                    g.drawImage(BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().skill.getSkillImage(),
+                            (BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().position.getY() + 1) * Block.size,
+                            BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().position.getX() * Block.size,
+                            BattleField.at(oldPosition_X, oldPosition_Y).getUsingSkillBeing().skill.skillRange * Block.size,
+                            Block.size);
+
+                g.drawImage(getImage(),
+                        final_nextPosition_Y * Block.size, nextPosition_X * Block.size,
+                        Block.size, Block.size);
+
+            });
+        }
+    }
+    private void killBeing(int x, int y) {
+        BattleField.at(x, y).getBeing().setDead(true);
+    }
 }

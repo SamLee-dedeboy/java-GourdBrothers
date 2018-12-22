@@ -2,6 +2,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class GameController {
     //
@@ -26,20 +27,26 @@ public class GameController {
 
     public static void setRoundPassed() {
         roundPassed.set(curRound, true);
+        handleRoundEnd();
     }
 
     public static void setRoundFailed() {
         roundPassed.set(curRound, false);
+        handleRoundEnd();
     }
 
-    public static void handleGameEnd() {
-        GraphicsContext g = GUIController.getMyGraphicContext();
+    public static void handleRoundEnd(){
         Gaming = false;
-        Monster.stopAllThreads();
-        //TODO: if all dead
-        GameController.setRoundPassed();
+        try {
+            //TimeUnit.MILLISECONDS.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        GUIController.resetRoundButton(false);
+        GraphicsContext g = GUIController.getMyGraphicContext();
         g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
-        Heros.getInstance().snake();
+        Monster.resetRound();
+        Heros.resetRound();
         BattleField.display(g);
     }
 
@@ -63,18 +70,25 @@ public class GameController {
     }
     public static void handleGameStart() {
         Gaming = true;
+        GUIController.resetRoundButton(true);
         //
         //Execute Threads
         //
+
+        //Heros
         exec.execute(Grandpa.getInstance());
         for (int i = 0; i < 7; i++) {
             exec.execute(Heros.gourdBrothers.get(i));
         }
+        exec.execute(Heros.grandpa);
 
+        //Monsters
         for (int i = 0; i < Monster.numOfMinion; i++) {
             exec.execute(Monster.minions.get(i));
         }
-        //exec.shutdown();
+        exec.execute(Monster.SCORPION);
+
+        //xec.shutdown();
     }
 
     public static void setCurRound(int round) {

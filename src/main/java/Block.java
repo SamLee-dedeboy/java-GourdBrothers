@@ -1,5 +1,5 @@
 public class Block <T extends Organism> {
-    public static int size = 80;
+    public static int size = Constants.Block_length;
     private T being = null;
     private T skillUsingBeing = null;
     private int x, y;

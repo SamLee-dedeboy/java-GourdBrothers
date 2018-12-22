@@ -1,5 +1,3 @@
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -15,6 +13,7 @@ public class Skill {
     private int skillHeight;
     private int attackPoint;
     public int frequency;
+    private int anchorFrequency;
     public boolean flying = false;
 
     private abstract class FlyingSkill extends Skill implements Runnable {
@@ -30,7 +29,7 @@ public class Skill {
             try {
                 boolean hit = false;
                 g = GUIController.getMyGraphicContext();
-                while (cur_Y < BattleField.getWidth()) {
+                while (GameController.Gaming && cur_Y < BattleField.getWidth()) {
                     final int final_cur_X = cur_X;
                     final int final_cur_Y = cur_Y;
                     Platform.runLater(() -> {
@@ -94,9 +93,13 @@ public class Skill {
         }
     }
 
+    //
+    //skill
+    //
     public Skill(Organism user) {
         String imagePath = "file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\";
-        frequency = (int) (2000 + Math.random() * (2000 + 1));
+        anchorFrequency = Constants.initialFrequency;
+        frequency = (int) (anchorFrequency+ Math.random() * (anchorFrequency + 1));
         this.user = user;
         if (user instanceof Gourd) {
             if (((Gourd) user).tellRank() == 1 || ((Gourd) user).tellRank() == 5) {
@@ -152,9 +155,11 @@ public class Skill {
                 case PURPLE:
                     absorb(x, y);
                     display(GUIController.getMyGraphicContext(), x, y + 1);
+                    break;
             }
         }
     }
+
 
     private void punch(int x, int y) {
         useNormalSkill(x, y + 1);
@@ -206,7 +211,13 @@ public class Skill {
         }
         return hit;
     }
-
+    public void setFrequency(int frequency) {
+        this.anchorFrequency = frequency;
+        this.frequency = (int) (anchorFrequency + Math.random() * (anchorFrequency + 1));
+    }
+    public int getFrequency() {
+        return frequency;
+    }
     private void setBlockUsingSkill(int x, int y, boolean flag) {
         synchronized (BattleField.getInstance()) {
             for (int i = y; i <= y + skillRange && i < BattleField.getWidth(); i++) {
@@ -237,7 +248,7 @@ public class Skill {
         });
 
     }
-
+    @Deprecated
     private void displayMovement(GraphicsContext g, int x, int y) throws Exception {
         int cur_X = x;
         int cur_Y = y;

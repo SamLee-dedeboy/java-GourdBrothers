@@ -7,4 +7,5 @@ public class Constants {
     public static int height = m * Block_length;
     public static int initialHealthPoint = 10;
     public static int initialAttackPoint = 10;
+    public static int initialFrequency = 2000;
 }

@@ -4,22 +4,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
     private static GUIController instance = null;
+    //constructor only called by fxml loader
     public GUIController() {
+        //a special Singleton, see the comment below
         instance = this;
     }
     public synchronized static GUIController getInstance() {
-        //instance should have been initialized by fxml loader
-        //if not, and you add instance = new GUIController here,
-        //then you get a different copy of GUIController, which
-        //is not loaded by fxml loader, therefore components in
-        //this copy are not initialized as well, and the program
-        //will not work properly
+        // instance should have been initialized by fxml loader.
+        // if not, and even if you add instance = new GUIController
+        // here, the program still won't work out right. Because by
+        // add that line you get a different copy of GUIController,
+        // which is not loaded by fxml loader, therefore components
+        // in this copy are not initialized as well, and the program
+        // will not work properly
         return instance;
     }
     @FXML Canvas gameView;
@@ -128,18 +130,15 @@ public class GUIController implements Initializable {
     @FXML
     private void handleButtonStart(ActionEvent event) {
         GameController.handleGameStart();
-
-        setRoundButtonDisable();
-        buttonEnd.setDisable(false);
-        buttonStart.setDisable(true);
-
     }
 
     @FXML
     private void handleButtonEnd(ActionEvent event) {
-        GameController.handleGameEnd();
+        GameController.setRoundFailed();
+    }
+    public static void resetRoundButton(boolean start) {
         setRoundButtonDisable();
-        buttonStart.setDisable(false);
-        buttonEnd.setDisable(true);
+        instance.buttonStart.setDisable(start);
+        instance.buttonEnd.setDisable(!start);
     }
 }

@@ -1,5 +1,7 @@
 import javafx.scene.image.Image;
 
+import java.util.concurrent.TimeUnit;
+
 public class Scorpion extends Organism {
     private static Scorpion instance = new Scorpion();
     private static String name = "蝎子精";
@@ -19,11 +21,12 @@ public class Scorpion extends Organism {
 
     @Override
     public void run() {
-
-        while (GameController.Gaming) {
+        while (GameController.Gaming && position.getY() > 1) {
             try {
-                //moveForward();
-                //TimeUnit.MILLISECONDS.sleep(200);
+                if (!isDead()) {
+                    moveForward(-1);
+                    TimeUnit.MILLISECONDS.sleep(2500);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -38,7 +41,4 @@ public class Scorpion extends Organism {
         return image;
     }
 
-    public void cheers() {
-        //TODO
-    }
 }

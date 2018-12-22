@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +11,6 @@ public class UserInterface extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("UserInterface.fxml"));
-
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

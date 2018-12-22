@@ -4,7 +4,7 @@ public class Heros extends Group {
     private static int n;
 
     public static ArrayList<Gourd> gourdBrothers;
-    private static Grandpa grandpa = Grandpa.getInstance();
+    public static Grandpa grandpa = Grandpa.getInstance();
 
     public synchronized static Heros getInstance() {
         if (instance == null)
@@ -17,7 +17,12 @@ public class Heros extends Group {
         grandpa = Grandpa.getInstance();
         n = 7;
     }
-
+    public static void resetRound() {
+        for(Gourd gourd: gourdBrothers) {
+                gourd.skill.setFrequency(Constants.initialFrequency);
+        }
+        instance.snake();
+    }
     public static boolean AllDead() {
         if (grandpa.isDead()) {
             for (int i = 0; i < 7; i++) {

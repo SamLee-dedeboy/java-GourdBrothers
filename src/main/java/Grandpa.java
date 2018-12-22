@@ -1,11 +1,13 @@
 import javafx.scene.image.Image;
 
+import java.util.concurrent.TimeUnit;
+
 public class Grandpa extends Organism implements Runnable {
     private static Grandpa instance = new Grandpa();
     private static String name = "爷爷";
     private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
     public static enumGroup group = enumGroup.HERO;
-
+    private boolean cheering = false;
     private Grandpa() {
     }
 
@@ -18,16 +20,20 @@ public class Grandpa extends Organism implements Runnable {
 
     @Override
     public void run() {
-        while (GameController.Gaming) {
-            try {
-                //moveForward();
-                //TimeUnit.MILLISECONDS.sleep(200);
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            TimeUnit.MILLISECONDS.sleep(1000);
+            while (GameController.Gaming) {
+                if (!cheering) {
+                    cheers();
+                    TimeUnit.MILLISECONDS.sleep(3000);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
+
+
 
     public String tellName() {
         return name;
@@ -38,6 +44,14 @@ public class Grandpa extends Organism implements Runnable {
     }
 
     public void cheers() {
-        //TODO
+        int doCheer = (int) (2000 + Math.random() * (2000 + 1));
+        if(doCheer%10 == 0) {   // cheer by probability = 1/10
+            for(int i = 0; i < 7; i++) {
+                Heros.gourdBrothers.get(i).skill.setFrequency
+                        (Heros.gourdBrothers.get(i).skill.getFrequency() / 10);
+
+            }
+            cheering = true;
+        }
     }
 }
