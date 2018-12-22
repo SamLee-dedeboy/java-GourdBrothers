@@ -4,7 +4,7 @@ import java.util.*;
 public class BattleField {
     private static int height = Constants.m;
     private static int width = Constants.n;
-    private static BattleField instance = new BattleField(height, width);
+    private static BattleField instance;
 
     private volatile static ArrayList<ArrayList<Block>> field;
 

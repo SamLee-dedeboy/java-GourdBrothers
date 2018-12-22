@@ -8,7 +8,7 @@ public class GameController {
     //
     //Singleton
     //
-    public static GameController instance = new GameController();
+    public static GameController instance;
 
     public synchronized static GameController getInstance() {
         if (instance == null)
@@ -65,6 +65,7 @@ public class GameController {
         //Heros and Monsters
         //
         Heros.getInstance().snake();
+        Monster.getInstance();
         BattleField.display(GUIController.getMyGraphicContext());
 
     }

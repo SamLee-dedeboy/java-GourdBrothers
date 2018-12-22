@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 import java.util.concurrent.TimeUnit;
 
 public class Scorpion extends Organism {
-    private static Scorpion instance = new Scorpion();
+    private static Scorpion instance;
     private static String name = "Scorpion";
     private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\scorpion.jpg");
     public enumGroup group = enumGroup.MONSTER;

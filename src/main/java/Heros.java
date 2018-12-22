@@ -1,6 +1,6 @@
 import java.util.*;
 public class Heros extends Group {
-    private static Heros instance = new Heros();
+    private static Heros instance;
     private static int n;
 
     public static ArrayList<Gourd> gourdBrothers;

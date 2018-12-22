@@ -1,9 +1,9 @@
 
 import java.util.*;
 public class Monster extends Group {
-    private static Monster instance = new Monster();
-    public static Serpent SERPENT = Serpent.getInstance();
-    public static Scorpion SCORPION = Scorpion.getInstance();
+    private static Monster instance;
+    public static Serpent SERPENT;
+    public static Scorpion SCORPION;
     //static Minion[] minions;
     static ArrayList<Minion> minions;
     public static int numOfMinion;
@@ -14,17 +14,19 @@ public class Monster extends Group {
     //Singleton
     //
     public synchronized static Monster getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Monster();
+        }
         return instance;
     }
 
     private Monster() {
-        numOfMinion = 0;
         minions = new ArrayList<>(Arrays.asList(new Minion[initialNumOfMinion]));
         for (int i = 0; i < initialNumOfMinion; i++) {
             minions.set(i, new Minion());
         }
+        SCORPION = Scorpion.getInstance();
+        SERPENT = Serpent.getInstance();
     }
 
     public static void stopAllThreads() {

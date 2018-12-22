@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 import java.util.concurrent.TimeUnit;
 
 public class Grandpa extends Organism implements Runnable {
-    private static Grandpa instance = new Grandpa();
+    private static Grandpa instance;
     private static String name = "Grandpa";
     private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
     public static enumGroup group = enumGroup.HERO;
