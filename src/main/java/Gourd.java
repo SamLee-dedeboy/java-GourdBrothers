@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 public class Gourd extends Organism implements Runnable {
 
     public enum enum_Gourd {
-        RED("老大", "赤", 0), ORANGE("老二", "橙", 1), YELLOW("老三", "黄", 2),
-        GREEN("老四", "绿", 3), CYAN("老五", "青", 4), BLUE("老六", "蓝", 5), PURPLE("老七", "紫", 6);
+        RED("Frst", "RED", 0), ORANGE("Scnd", "ORANGE", 1), YELLOW("Thrd", "YELLOW", 2),
+        GREEN("Frth", "GREEN", 3), CYAN("Ffth", "CYAN", 4), BLUE("Sxth", "BLUE", 5), PURPLE("SVNTH", "PURPLE", 6);
         private String name, color;
         private int rank;
 

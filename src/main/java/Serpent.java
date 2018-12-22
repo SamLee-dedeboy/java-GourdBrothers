@@ -2,7 +2,7 @@ import javafx.scene.image.Image;
 
 public class Serpent extends Organism {
     private static Serpent instance = new Serpent();
-    private static String name = "蛇精";
+    private static String name = "Serpant";
     private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\serpent.jpg");
     public enumGroup group = enumGroup.MONSTER;
 

@@ -1,7 +1,7 @@
 
 import java.util.*;
 public class Monster extends Group {
-    private static Monster instance;
+    private static Monster instance = new Monster();
     public static Serpent SERPENT = Serpent.getInstance();
     public static Scorpion SCORPION = Scorpion.getInstance();
     //static Minion[] minions;
