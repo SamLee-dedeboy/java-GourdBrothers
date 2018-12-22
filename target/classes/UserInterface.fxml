@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+                xmlns:fx="http://javafx.com/fxml"
+                fx:controller="GUIController"
+                prefHeight="800.0" prefWidth="1420.0"
+                stylesheets="UserInterface.css">
+        <right>
+            <VBox spacing="10" style="-fx-background-color : #EBF0FA">
+                <padding> <Insets right="90" left="90"/> </padding>
+                <children>
+                    <Button fx:id="buttonStart" text="StartRound" prefHeight="70" prefWidth="120" onAction="#handleButtonStart"/>
+                    <Button fx:id="buttonEnd" text="EndRound" prefHeight="70" prefWidth="120" onAction="#handleButtonEnd" disable="true"/>
+                    <Button fx:id="buttonSnake" text="Snake" prefHeight="70" prefWidth="120" onAction="#handleButtonSnake"/>
+                    <Button fx:id="buttonCrane" text="Crane" prefHeight="70" prefWidth="120" onAction="#handleButtonCrane"/>
+                    <Button fx:id="buttonWildGoose" text="WildGoose" prefHeight="70" prefWidth="120" onAction="#handleButtonWildGoose"/>
+                    <Button fx:id="buttonYoke" text="Yoke" prefHeight="70" prefWidth="120" onAction="#handleButtonYoke"/>
+                    <Button fx:id="buttonScale" text="Scale" prefHeight="70" prefWidth="120" onAction="#handleButtonScale"/>
+                    <Button fx:id="buttonDiamond" text="Diamond" prefHeight="70" prefWidth="120" onAction="#handleButtonDiamond"/>
+                    <Button fx:id="buttonCrescent" text="Crescent" prefHeight="70" prefWidth="120" onAction="#handleButtonCrescent"/>
+                    <Button fx:id="buttonArrow" text="Arrow" prefHeight="70" prefWidth="120" onAction="#handleButtonArrow"/>
+                </children>
+            </VBox>
+        </right>
+        <Canvas fx:id="gameView" width="1120" height="800" />
+    </BorderPane>

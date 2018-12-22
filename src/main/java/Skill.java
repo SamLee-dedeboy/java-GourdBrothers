@@ -29,7 +29,7 @@ public class Skill {
         protected void displayFly() {
             try {
                 boolean hit = false;
-                g = UserInterface.getMyGraphicContext();
+                g = GUIController.getMyGraphicContext();
                 while (cur_Y < BattleField.getWidth()) {
                     final int final_cur_X = cur_X;
                     final int final_cur_Y = cur_Y;
@@ -127,7 +127,7 @@ public class Skill {
             switch (((Gourd) user).gourd) {
                 case RED:
                     punch(x, y);
-                    display(UserInterface.getMyGraphicContext(), x, y + 1);
+                    display(GUIController.getMyGraphicContext(), x, y + 1);
                     break;
                 case ORANGE:
                     laser(x, y);
@@ -135,15 +135,15 @@ public class Skill {
                     break;
                 case YELLOW:
                     wall(x, y);
-                    display(UserInterface.getMyGraphicContext(), x, y + 1);
+                    display(GUIController.getMyGraphicContext(), x, y + 1);
                     break;
                 case GREEN:
                     fire(x, y);
-                    display(UserInterface.getMyGraphicContext(), x, y + 1);
+                    display(GUIController.getMyGraphicContext(), x, y + 1);
                     break;
                 case CYAN:
                     water(x, y);
-                    display(UserInterface.getMyGraphicContext(), x, y + 1);
+                    display(GUIController.getMyGraphicContext(), x, y + 1);
                     break;
                 case BLUE:
                     illusion(x, y);
@@ -151,7 +151,7 @@ public class Skill {
                     break;
                 case PURPLE:
                     absorb(x, y);
-                    display(UserInterface.getMyGraphicContext(), x, y + 1);
+                    display(GUIController.getMyGraphicContext(), x, y + 1);
             }
         }
     }

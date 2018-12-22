@@ -1,7 +1,7 @@
 import javafx.scene.image.Image;
 
 public class Grandpa extends Organism implements Runnable {
-    private static Grandpa instance = null;
+    private static Grandpa instance = new Grandpa();
     private static String name = "爷爷";
     private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
     public static enumGroup group = enumGroup.HERO;

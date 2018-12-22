@@ -4,7 +4,7 @@ import java.util.*;
 public class BattleField {
     private static int height = Constants.m;
     private static int width = Constants.n;
-    private static BattleField instance = null;
+    private static BattleField instance = new BattleField(height, width);
 
     private volatile static ArrayList<ArrayList<Block>> field;
 
@@ -16,10 +16,6 @@ public class BattleField {
                 field.get(i).add(new Block(i, j));
             }
         }
-
-        height = m;
-        width = n;
-
     }
 
     public static BattleField getInstance() {
@@ -78,19 +74,6 @@ public class BattleField {
     }
 
     public static synchronized void display(GraphicsContext g) {
-
-        //g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
-//            synchronized (getInstance()) {
-////                for (int i = 0; i < height; i++) {
-////                    for (int j = 0; j < width; j++) {
-////                        if (field.get(i).get(j).getBeing() == null) {
-////                            System.out.print("[ ] ");
-////                        } else {
-////                            System.out.print(field.get(i).get(j).getBeing().tellName() + " ");
-////                        }
-////                    }
-////                    System.out.print("\n");
-////                }
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

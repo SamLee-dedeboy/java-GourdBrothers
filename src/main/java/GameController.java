@@ -4,7 +4,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GameController {
-    public static GameController instance = null;
+    //
+    //Singleton
+    //
+    public static GameController instance = new GameController();
+
+    public synchronized static GameController getInstance() {
+        if (instance == null)
+            instance = new GameController();
+        return instance;
+    }
+    private GameController() { }
+
+
     public static boolean Gaming = false;
     public static int numOfRound = 8;
     private static int curRound = -1;
@@ -21,7 +33,7 @@ public class GameController {
     }
 
     public static void handleGameEnd() {
-        GraphicsContext g = UserInterface.getMyGraphicContext();
+        GraphicsContext g = GUIController.getMyGraphicContext();
         Gaming = false;
         Monster.stopAllThreads();
         //TODO: if all dead
@@ -31,6 +43,24 @@ public class GameController {
         BattleField.display(g);
     }
 
+    public static void initGame() {
+        for (int i = 0; i < numOfRound; i++)
+            roundPassed.add(false);
+        exec = Executors.newCachedThreadPool();
+        //
+        //
+        //battlefield
+        //
+        BattleField.getInstance();
+
+
+        //
+        //Heros and Monsters
+        //
+        Heros.getInstance().snake();
+        BattleField.display(GUIController.getMyGraphicContext());
+
+    }
     public static void handleGameStart() {
         Gaming = true;
         //
@@ -51,20 +81,10 @@ public class GameController {
         curRound = round;
     }
 
-    private GameController() {
-        for (int i = 0; i < numOfRound; i++)
-            roundPassed.add(false);
-        exec = Executors.newCachedThreadPool();
-    }
 
     public static ExecutorService getExecutor() {
         return exec;
     }
 
-    public synchronized static GameController getInstance() {
-        if (instance == null)
-            instance = new GameController();
-        return instance;
-    }
 
 }

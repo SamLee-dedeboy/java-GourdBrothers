@@ -56,7 +56,7 @@ public class Minion extends Organism {
             //
             int final_nextPosition_Y = nextPosition_Y;
             Platform.runLater(() -> {
-                GraphicsContext g = UserInterface.getMyGraphicContext();
+                GraphicsContext g = GUIController.getMyGraphicContext();
                 g.clearRect(oldPosition_Y * Block.size, oldPosition_X * Block.size, Block.size, Block.size);
 
                 //repaint covered unflying skill
