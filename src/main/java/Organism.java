@@ -3,17 +3,22 @@ import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class Organism implements Runnable {
     public enum enumGroup {HERO, MONSTER}
 
-
+    protected String name;
     public enumGroup group;
-    public Block position;
-    public Image image;
-    public Skill skill = null;
-    public int healthPoint = Constants.initialHealthPoint;
-    private boolean dead = false;
+    protected Image image;
+    protected Block position = null;
+    protected Image usingSkillImage = null;
+    protected Skill skill = null;
+    protected int healthPoint = Constants.initialHealthPoint;
+    protected boolean dead = false;
+    protected boolean stop = false;
 
+    public void stopMoving() { this.stop = true;}
     public void moveTo(Block b) {
         if (this.position != null)
             this.position.setNull();
@@ -39,13 +44,19 @@ public abstract class Organism implements Runnable {
                 if (being != null) {
                     // if(being.skill != null) {
                     if (being.group == enumGroup.HERO) {
-                        if (being.skill.usingSkill) {
-                            being.skill.usingSkill = false;
-                            //set Block using skill false
-                            for (int i = position.getY() + 1;
-                                 i < position.getY() + 1 + being.skill.skillRange;
-                                 i++) {
-                                BattleField.at(position.getX(), i).setUsingSkill(false);
+                        if(being.tellName().equals("Grandpa")) {
+                            GameController.setRoundFailed();
+                            return;
+                        }
+                        if(being.skill != null) {
+                            if (being.skill.usingSkill) {
+                                being.skill.usingSkill = false;
+                                //set Block using skill false
+                                for (int i = position.getY() + 1;
+                                     i < position.getY() + 1 + being.skill.skillRange;
+                                     i++) {
+                                    BattleField.at(position.getX(), i).setUsingSkill(false);
+                                }
                             }
                         }
                     } else {
@@ -56,10 +67,21 @@ public abstract class Organism implements Runnable {
                 }
                 BattleField.at(position.getX(), position.getY()).setNull();
             }
-            if (Monster.AllDead())
-                GameController.setRoundPassed();
-            if (Heros.AllDead())
-                GameController.setRoundFailed();
+            LogController.writeLog(this.tellName() + " dead");
+            try {
+                if (Monster.AllDead()) {
+                    //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
+                    GameController.setRoundPassed();
+                }
+                if (Heros.AllDead()) {
+                    //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
+                    GameController.setRoundFailed();
+                }
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -67,10 +89,10 @@ public abstract class Organism implements Runnable {
         return dead;
     }
 
-    public abstract String tellName();
+    public String tellName() { return name; }
 
-    public abstract Image getImage();
-
+    public Image getImage() { return image; }
+    public Image getUsingSkillImage() { return usingSkillImage; }
     public void moveForward(int direction) {
         int oldPosition_X = position.getX();
         int oldPosition_Y = position.getY();
@@ -80,9 +102,14 @@ public abstract class Organism implements Runnable {
             if (BattleField.collide(nextPosition_X, nextPosition_Y)) {
                 if (BattleField.at(nextPosition_X, nextPosition_Y).getBeing().group == enumGroup.HERO) {
                     killBeing(nextPosition_X, nextPosition_Y);
-                } else
-                    nextPosition_Y--;
+                    System.out.println("kill huluwa!");
+                } else {
+                    System.out.println("met friend");
+                    return;
+                }
             }
+            if(nextPosition_Y < 0)
+                return;
             this.moveTo(BattleField.at(nextPosition_X, nextPosition_Y));
             //
             //display movement

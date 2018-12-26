@@ -3,18 +3,16 @@ import javafx.scene.image.Image;
 import java.util.concurrent.TimeUnit;
 
 public class Grandpa extends Organism implements Runnable {
-    private static Grandpa instance;
-    private static String name = "Grandpa";
-    private static Image image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
-    public static enumGroup group = enumGroup.HERO;
+    private static Grandpa instance = new Grandpa();
     private boolean cheering = false;
     private Grandpa() {
+        name = "Grandpa";
+        group = enumGroup.HERO;
+        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
+
     }
 
-    public synchronized static Grandpa getInstance() {
-        if (instance == null) {
-            instance = new Grandpa();
-        }
+    public static Grandpa getInstance() {
         return instance;
     }
 
@@ -31,17 +29,10 @@ public class Grandpa extends Organism implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //GameController.cdLatch.countDown();
+
     }
 
-
-
-    public String tellName() {
-        return name;
-    }
-
-    public Image getImage() {
-        return image;
-    }
 
     public void cheers() {
         int doCheer = (int) (2000 + Math.random() * (2000 + 1));

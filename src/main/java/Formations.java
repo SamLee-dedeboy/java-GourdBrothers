@@ -7,4 +7,5 @@ interface Formations {
     void diamond();
     void crescent();
     void arrow();
+    int a = 1;
 }

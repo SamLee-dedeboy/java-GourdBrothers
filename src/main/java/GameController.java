@@ -1,5 +1,8 @@
 import javafx.scene.canvas.GraphicsContext;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -8,15 +11,11 @@ public class GameController {
     //
     //Singleton
     //
-    public static GameController instance;
-
-    public synchronized static GameController getInstance() {
-        if (instance == null)
-            instance = new GameController();
+    public static GameController instance = new GameController();
+    public static synchronized GameController getInstance() {
         return instance;
     }
     private GameController() { }
-
 
     public static boolean Gaming = false;
     public static int numOfRound = 8;
@@ -31,45 +30,75 @@ public class GameController {
     }
 
     public static void setRoundFailed() {
+        System.out.println("round failed");
         roundPassed.set(curRound, false);
         handleRoundEnd();
     }
+    public static void stopAllThreads() {
+        exec.shutdown();
+        exec = Executors.newCachedThreadPool();
+    }
+    public static void handleRoundEnd() {
+        System.out.println("Round end!");
 
-    public static void handleRoundEnd(){
         Gaming = false;
+        stopAllThreads();
+        //TimeUnit.MILLISECONDS.sleep(1000);
+        GUIController.resetRoundButton(false);
+
+
+        GraphicsContext g = GUIController.getMyGraphicContext();
+
+        g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
+
+
+        Monster.resetRound();
+
+
+        Heros.resetRound();
+
+        BattleField.display(g);
+
+
+        //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
+
+
         try {
-            //TimeUnit.MILLISECONDS.sleep(1000);
-        } catch (Exception e) {
+            LogController.saveLog();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-        GUIController.resetRoundButton(false);
-        GraphicsContext g = GUIController.getMyGraphicContext();
-        g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
-        Monster.resetRound();
-        Heros.resetRound();
-        BattleField.display(g);
+
+        exec.shutdownNow();
+        Skill.skillExec.shutdownNow();
+        try {
+            exec.awaitTermination(100, TimeUnit.DAYS);
+            Skill.skillExec.awaitTermination(100, TimeUnit.DAYS);
+            System.out.println("all shut down");
+            BattleField.print();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Skill.skillExec = Executors.newCachedThreadPool();
+        exec = Executors.newCachedThreadPool();
+    }
+    public static int getCurRound() {
+        return curRound;
     }
 
     public static void initGame() {
         for (int i = 0; i < numOfRound; i++)
             roundPassed.add(false);
+
         exec = Executors.newCachedThreadPool();
-        //
-        //
-        //battlefield
-        //
-        BattleField.getInstance();
-
-
-        //
-        //Heros and Monsters
-        //
         Heros.getInstance().snake();
-        Monster.getInstance();
         BattleField.display(GUIController.getMyGraphicContext());
 
     }
-    public static void handleGameStart() {
+    public static void handleRoundStart() {
+        LogController.openNewRoundLog(curRound);
         Gaming = true;
         GUIController.resetRoundButton(true);
         //
@@ -81,14 +110,13 @@ public class GameController {
         for (int i = 0; i < 7; i++) {
             exec.execute(Heros.gourdBrothers.get(i));
         }
-        exec.execute(Heros.grandpa);
 
         //Monsters
         for (int i = 0; i < Monster.numOfMinion; i++) {
             exec.execute(Monster.minions.get(i));
         }
         exec.execute(Monster.SCORPION);
-
+        //cdLatch = new CountDownLatch(7 + Monster.numOfMinion + 2);
         //xec.shutdown();
     }
 

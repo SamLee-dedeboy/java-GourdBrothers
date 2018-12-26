@@ -1,11 +1,10 @@
+import java.text.Normalizer;
 import java.util.*;
 public class Heros extends Group {
-    private static Heros instance;
+    private static Heros instance = new Heros();
     private static int n;
-
     public static ArrayList<Gourd> gourdBrothers;
     public static Grandpa grandpa = Grandpa.getInstance();
-
     public synchronized static Heros getInstance() {
         if (instance == null)
             instance = new Heros();
@@ -20,7 +19,10 @@ public class Heros extends Group {
     public static void resetRound() {
         for(Gourd gourd: gourdBrothers) {
                 gourd.skill.setFrequency(Constants.initialFrequency);
+                gourd.setDead(false);
         }
+        grandpa.setDead(false);
+        BattleField.resetAllBlock();
         instance.snake();
     }
     public static boolean AllDead() {

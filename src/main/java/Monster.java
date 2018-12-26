@@ -1,14 +1,14 @@
 
 import java.util.*;
 public class Monster extends Group {
-    private static Monster instance;
+    private static int initialNumOfMinion = 20;
+    private static int numOfAliveMinion = initialNumOfMinion;
+    private static Monster instance = new Monster();
     public static Serpent SERPENT;
     public static Scorpion SCORPION;
     //static Minion[] minions;
     static ArrayList<Minion> minions;
     public static int numOfMinion;
-    private static int initialNumOfMinion = 20;
-    private static int numOfAliveMinion = initialNumOfMinion;
 
     //
     //Singleton
@@ -23,7 +23,7 @@ public class Monster extends Group {
     private Monster() {
         minions = new ArrayList<>(Arrays.asList(new Minion[initialNumOfMinion]));
         for (int i = 0; i < initialNumOfMinion; i++) {
-            minions.set(i, new Minion());
+            minions.set(i, new Minion(i));
         }
         SCORPION = Scorpion.getInstance();
         SERPENT = Serpent.getInstance();
@@ -55,17 +55,19 @@ public class Monster extends Group {
     //formation related functions
     //
     public void reformate() {
+        Heros.resetRound();
         SERPENT.setDead(false);
         SERPENT.healthPoint = Constants.initialHealthPoint;
         SCORPION.setDead(false);
         SCORPION.healthPoint = Constants.initialHealthPoint;
         for (int i = 0; i < numOfMinion; i++) {
             minions.get(i).setDead(false);
-            SERPENT.healthPoint = Constants.initialHealthPoint;
+            minions.get(i).healthPoint = Constants.initialHealthPoint;
             minions.get(i).fallBack();
         }
         SERPENT.fallBack();
         SCORPION.fallBack();
+
     }
     public synchronized void snake() {
         reformate();
@@ -85,8 +87,8 @@ public class Monster extends Group {
     }
 
     public synchronized void crane() {
-        reformate();
         int n = 6;
+        reformate();
         numOfMinion = n;
         numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
@@ -103,8 +105,8 @@ public class Monster extends Group {
     }
 
     public synchronized void wildGoose() {
-        reformate();
         int n = 6;
+        reformate();
         numOfMinion = n;
         numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
@@ -121,8 +123,8 @@ public class Monster extends Group {
     }
 
     public synchronized void yoke() {
-        reformate();
         int n = 6;
+        reformate();
         numOfMinion = n;
         numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
@@ -158,9 +160,8 @@ public class Monster extends Group {
     }
 
     public synchronized void diamond() {
-        reformate();
         int n = 8;
-        numOfMinion = n;
+        reformate();
         numOfAliveMinion = numOfMinion;
         int width = BattleField.getWidth();
         int height = BattleField.getHeight();

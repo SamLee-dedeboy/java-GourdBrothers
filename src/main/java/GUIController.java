@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,8 +66,11 @@ public class GUIController implements Initializable {
     @FXML
     private void handleButtonSnake(ActionEvent event) {
         Monster.getInstance().snake();
+
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+
+
         GameController.setCurRound(0);
     }
 
@@ -129,7 +133,7 @@ public class GUIController implements Initializable {
 
     @FXML
     private void handleButtonStart(ActionEvent event) {
-        GameController.handleGameStart();
+        GameController.handleRoundStart();
     }
 
     @FXML

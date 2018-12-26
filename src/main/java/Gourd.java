@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 public class Gourd extends Organism implements Runnable {
 
     public enum enum_Gourd {
-        RED("Frst", "RED", 0), ORANGE("Scnd", "ORANGE", 1), YELLOW("Thrd", "YELLOW", 2),
-        GREEN("Frth", "GREEN", 3), CYAN("Ffth", "CYAN", 4), BLUE("Sxth", "BLUE", 5), PURPLE("SVNTH", "PURPLE", 6);
+        RED("大娃", "RED", 0), ORANGE("二娃", "ORANGE", 1), YELLOW("三娃", "YELLOW", 2),
+        GREEN("四娃", "GREEN", 3), CYAN("五娃", "CYAN", 4), BLUE("六娃", "BLUE", 5), PURPLE("七娃", "PURPLE", 6);
         private String name, color;
         private int rank;
 
@@ -22,10 +22,6 @@ public class Gourd extends Organism implements Runnable {
     //
     public enum_Gourd gourd;
 
-    public String tellName() {
-        return this.gourd.name;
-    }
-
     public String tellColor() {
         return this.gourd.color;
     }
@@ -39,15 +35,13 @@ public class Gourd extends Organism implements Runnable {
     }
 
     Gourd(int rank) {
+        gourd = enum_Gourd.values()[rank];
+        name = gourd.name;
         group = enumGroup.HERO;
         image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\" + (rank + 1) + ".jpg");
-        gourd = enum_Gourd.values()[rank];
         skill = new Skill(this);
     }
 
-    public Image getImage() {
-        return this.image;
-    }
 
     public static Gourd[] values() {
         Gourd[] gourdBrothers = new Gourd[7];
@@ -64,8 +58,11 @@ public class Gourd extends Organism implements Runnable {
                 if (!isDead()) {
                     if (BattleField.hasEnemy(enumGroup.HERO, position.getX(), position.getY(), skill.skillRange)) {
                         //System.out.println("incoming!");
+                        LogController.writeLog(this.tellName() + " use skill: " + skill.skillName);
                         skill.useSkill(position.getX(), position.getY());
-                        TimeUnit.MILLISECONDS.sleep(skill.frequency);
+                        if(!GameController.Gaming)
+                            break;
+                        TimeUnit.MILLISECONDS.sleep(skill.frequency / 5);
                     }
 
 
@@ -73,10 +70,11 @@ public class Gourd extends Organism implements Runnable {
 
                 //attack();
                 // BattleField.display(UserInterface.getMyGraphicContext());
-
             }
+           // GameController.cdLatch.countDown();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

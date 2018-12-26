@@ -4,7 +4,7 @@ import java.util.*;
 public class BattleField {
     private static int height = Constants.m;
     private static int width = Constants.n;
-    private static BattleField instance;
+    private static BattleField instance = new BattleField(height,width);
 
     private volatile static ArrayList<ArrayList<Block>> field;
 
@@ -19,9 +19,6 @@ public class BattleField {
     }
 
     public static BattleField getInstance() {
-        if (instance == null) {
-            instance = new BattleField(Constants.m, Constants.n);
-        }
         return instance;
     }
 
@@ -52,7 +49,7 @@ public class BattleField {
     public static boolean hasEnemy(Organism.enumGroup myGroup, int x, int y, int range) {
         if (range == 1)
             range = 14;
-        for (int i = y + 1; i < y + range && i < width; i++) {
+        for (int i = y + 1; i <= y + range && i < width; i++) {
             if (at(x, i).getBeing() != null) {
                 return (at(x, i).getBeing().group != myGroup);
             }
@@ -65,13 +62,21 @@ public class BattleField {
                 if (field.get(i).get(j).getBeing() == null) {
                     System.out.print("[ ] ");
                 } else {
-                    System.out.print(field.get(i).get(j).getBeing().tellName() + " ");
+                    System.out.print(field.get(i).get(j).isUsingSkill() + " ");
                 }
             }
             System.out.print("\n");
         }
     }
-
+    public static void resetAllBlock() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                at(i,j).setUsingSkill(false);
+                at(i,j).setNull();
+            }
+        }
+        print();
+    }
     public static synchronized void display(GraphicsContext g) {
 
         for (int i = 0; i < height; i++) {

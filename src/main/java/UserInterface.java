@@ -4,6 +4,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 
 public class UserInterface extends Application {
@@ -17,6 +21,8 @@ public class UserInterface extends Application {
 
     }
     public static void main(String[] args) {
+
         launch(args);
+
     }
 }
