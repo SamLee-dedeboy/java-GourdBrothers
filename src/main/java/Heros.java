@@ -5,18 +5,19 @@ public class Heros extends Group {
     private static int n;
     public static ArrayList<Gourd> gourdBrothers;
     public static Grandpa grandpa = Grandpa.getInstance();
+    private static int skillFrequency = 0;
     public synchronized static Heros getInstance() {
         if (instance == null)
             instance = new Heros();
         return instance;
     }
-
     private Heros() {
         gourdBrothers = new ArrayList<>(Arrays.asList(Gourd.values()));
         grandpa = Grandpa.getInstance();
         n = 7;
     }
     public static void resetRound() {
+        grandpa.cheering = false;
         for(Gourd gourd: gourdBrothers) {
                 gourd.skill.setFrequency(Constants.initialFrequency);
                 gourd.setDead(false);
@@ -35,7 +36,14 @@ public class Heros extends Group {
         }
         return false;
     }
-
+    public static synchronized void setFrequency(int frequency) {
+        skillFrequency = frequency;
+        for(int i = 0; i < 7; i++)
+            gourdBrothers.get(i).skill.setFrequency(frequency);
+    }
+    public static int getFrequency() {
+        return skillFrequency;
+    }
     public static void stopAllThreads() {
         for (int i = 0; i < 7; i++) {
             gourdBrothers.get(i).setDead(true);

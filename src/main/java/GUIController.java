@@ -46,15 +46,26 @@ public class GUIController implements Initializable {
         GameController.initGame();
     }
 
-    public static void setRoundButtonDisable() {
-        instance.buttonSnake.setDisable(GameController.roundPassed.get(0));
-        instance.buttonCrane.setDisable(GameController.roundPassed.get(1));
-        instance.buttonWildGoose.setDisable(GameController.roundPassed.get(2));
-        instance. buttonYoke.setDisable(GameController.roundPassed.get(3));
-        instance.buttonScale.setDisable(GameController.roundPassed.get(4));
-        instance.buttonDiamond.setDisable(GameController.roundPassed.get(5));
-        instance.buttonCrescent.setDisable(GameController.roundPassed.get(6));
-        instance.buttonArrow.setDisable(GameController.roundPassed.get(7));
+    public static void setRoundButtonDisable(boolean start) {
+        if(start) {
+            instance.buttonSnake.setDisable(true);
+            instance.buttonCrane.setDisable(true);
+            instance.buttonWildGoose.setDisable(true);
+            instance. buttonYoke.setDisable(true);
+            instance.buttonScale.setDisable(true);
+            instance.buttonDiamond.setDisable(true);
+            instance.buttonCrescent.setDisable(true);
+            instance.buttonArrow.setDisable(true);
+        }else {
+            instance.buttonSnake.setDisable(GameController.roundPassed.get(0));
+            instance.buttonCrane.setDisable(GameController.roundPassed.get(1));
+            instance.buttonWildGoose.setDisable(GameController.roundPassed.get(2));
+            instance.buttonYoke.setDisable(GameController.roundPassed.get(3));
+            instance.buttonScale.setDisable(GameController.roundPassed.get(4));
+            instance.buttonDiamond.setDisable(GameController.roundPassed.get(5));
+            instance.buttonCrescent.setDisable(GameController.roundPassed.get(6));
+            instance.buttonArrow.setDisable(GameController.roundPassed.get(7));
+        }
     }
 
     public static GraphicsContext getMyGraphicContext() {
@@ -133,15 +144,16 @@ public class GUIController implements Initializable {
 
     @FXML
     private void handleButtonStart(ActionEvent event) {
-        GameController.handleRoundStart();
+        GameController.setRoundStart();
     }
 
     @FXML
     private void handleButtonEnd(ActionEvent event) {
-        GameController.setRoundFailed();
+        GameController.setRoundEnd();
     }
+
     public static void resetRoundButton(boolean start) {
-        setRoundButtonDisable();
+        setRoundButtonDisable(start);
         instance.buttonStart.setDisable(start);
         instance.buttonEnd.setDisable(!start);
     }

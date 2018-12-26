@@ -30,12 +30,14 @@ public class Scorpion extends Organism {
 
                     TimeUnit.MILLISECONDS.sleep(2500);
                 }
+                else
+                    break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
        // GameController.cdLatch.countDown();
-
+        System.out.println(tellName() + " end");
     }
 
 

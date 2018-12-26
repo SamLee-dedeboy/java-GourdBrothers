@@ -63,10 +63,9 @@ public class Gourd extends Organism implements Runnable {
                         if(!GameController.Gaming)
                             break;
                         TimeUnit.MILLISECONDS.sleep(skill.frequency / 5);
-                    }
-
-
-                }
+                       }
+                } else
+                    break;
 
                 //attack();
                 // BattleField.display(UserInterface.getMyGraphicContext());
@@ -75,6 +74,6 @@ public class Gourd extends Organism implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(tellName() + " end");
     }
 }

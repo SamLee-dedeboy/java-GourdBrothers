@@ -45,7 +45,7 @@ public abstract class Organism implements Runnable {
                     // if(being.skill != null) {
                     if (being.group == enumGroup.HERO) {
                         if(being.tellName().equals("Grandpa")) {
-                            GameController.setRoundFailed();
+                            GameController.setRoundEnd();
                             return;
                         }
                         if(being.skill != null) {
@@ -69,13 +69,8 @@ public abstract class Organism implements Runnable {
             }
             LogController.writeLog(this.tellName() + " dead");
             try {
-                if (Monster.AllDead()) {
-                    //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
-                    GameController.setRoundPassed();
-                }
-                if (Heros.AllDead()) {
-                    //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
-                    GameController.setRoundFailed();
+                if (Monster.AllDead() || Heros.AllDead()) {
+                    GameController.setRoundEnd();
                 }
 
             }

@@ -117,7 +117,7 @@ public class Skill {
     }
 
     private void illusion(int x, int y) {
-        GameController.getExecutor().execute(new Illusion(x, y + 1, this.user));
+        skillExec.execute(new Illusion(x, y + 1, this.user));
 
     }
 
@@ -143,13 +143,13 @@ public class Skill {
             for(Integer i: hitBeingIndex) {
                 BattleField.at(x, i).getBeing().healthPoint -= attackPoint;
                 if (BattleField.at(x, i).getBeing().healthPoint < 0) {
+                    //System.out.println("killed " + BattleField.at(x,i).getBeing().tellName());
                     BattleField.at(x, i).getBeing().setDead(true);
                     if(!GameController.Gaming)
                         break;
                 }
             }
         }
-
         return hit;
 
     }

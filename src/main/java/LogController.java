@@ -50,6 +50,7 @@ public class LogController {
             buf.add(record);
         }
         catch(IOException e) {
+            e.printStackTrace();
             openNewRoundLog(GameController.getCurRound());
             try {
                 System.out.println("write log");
@@ -68,6 +69,7 @@ public class LogController {
     public static void saveLog() {
         try {
             log.close();
+            System.out.println("save log done");
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -27,16 +27,15 @@ public class Minion extends Organism {
                     //int waitTime = (int) (1500 + Math.random() * (2000 + 1));
                     int waitTime = 1500;
                     TimeUnit.MILLISECONDS.sleep(waitTime);
-                } else {
-                    System.out.println(tellName() + " is dead");
-                    break;
                 }
+                else
+                    break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-
+        System.out.println(tellName() + " end");
     }
 
 

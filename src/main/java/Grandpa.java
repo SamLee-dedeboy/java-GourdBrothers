@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Grandpa extends Organism implements Runnable {
     private static Grandpa instance = new Grandpa();
-    private boolean cheering = false;
+    public boolean cheering = false;
     private Grandpa() {
         name = "Grandpa";
         group = enumGroup.HERO;
@@ -19,28 +19,36 @@ public class Grandpa extends Organism implements Runnable {
     @Override
     public void run() {
         try {
-            TimeUnit.MILLISECONDS.sleep(1000);
             while (GameController.Gaming) {
-                if (!cheering) {
-                    cheers();
-                    TimeUnit.MILLISECONDS.sleep(3000);
+                if (!isDead()) {
+                    System.out.println("not dead");
+                    if (!cheering) {
+                        System.out.println("try cheers");
+                        cheers();
+                        if(GameController.Gaming)
+                            TimeUnit.MILLISECONDS.sleep(3000);
+                        else
+                            break;
+                    } else
+                        break;
                 }
+                else
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         //GameController.cdLatch.countDown();
-
+        System.out.println(tellName() + " end");
     }
 
 
     public void cheers() {
         int doCheer = (int) (2000 + Math.random() * (2000 + 1));
-        if(doCheer%10 == 0) {   // cheer by probability = 1/10
-            for(int i = 0; i < 7; i++) {
-                Heros.gourdBrothers.get(i).skill.setFrequency
-                        (Heros.gourdBrothers.get(i).skill.getFrequency() / 10);
-
+        if(doCheer%20 == 0) {   // cheer by probability = 1/20
+            System.out.println("cheer success!");
+            synchronized (Heros.getInstance()) {
+                    Heros.setFrequency(Heros.getFrequency() / 10);
             }
             cheering = true;
         }

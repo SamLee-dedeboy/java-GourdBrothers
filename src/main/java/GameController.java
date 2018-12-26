@@ -1,13 +1,11 @@
 import javafx.scene.canvas.GraphicsContext;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class GameController {
+public class GameController implements  Runnable{
     //
     //Singleton
     //
@@ -22,67 +20,88 @@ public class GameController {
     private static int curRound = -1;
     public static ArrayList<Boolean> roundPassed = new ArrayList<>();
 
-    private static ExecutorService exec;
-
+    private static ExecutorService gameExec;
+    private static ExecutorService creatureExec;
+    private static boolean GameEnd = false;
+    private static boolean roundStart = false;
+    private static boolean roundEnd = false;
+    private static int passedNum = 0;
+    public static void setRoundStart() {
+        roundStart = true;
+    }
+    public static void setRoundEnd() {
+        roundEnd = true;
+    }
+    @Deprecated
     public static void setRoundPassed() {
         roundPassed.set(curRound, true);
         handleRoundEnd();
     }
-
+    @Deprecated
     public static void setRoundFailed() {
         System.out.println("round failed");
         roundPassed.set(curRound, false);
         handleRoundEnd();
     }
+    @Deprecated
     public static void stopAllThreads() {
-        exec.shutdown();
-        exec = Executors.newCachedThreadPool();
+//        exec.shutdown();
+//        exec = Executors.newCachedThreadPool();
     }
-    public static void handleRoundEnd() {
-        System.out.println("Round end!");
-
-        Gaming = false;
-        stopAllThreads();
-        //TimeUnit.MILLISECONDS.sleep(1000);
-        GUIController.resetRoundButton(false);
-
-
-        GraphicsContext g = GUIController.getMyGraphicContext();
-
-        g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
-
-
-        Monster.resetRound();
-
-
-        Heros.resetRound();
-
-        BattleField.display(g);
-
-
-        //Skill.skillExec.awaitTermination(3000, TimeUnit.MILLISECONDS);
-
-
+    private static void handleGameOver() {
+        //TODO
+    }
+    private static void handleRoundEnd() {
         try {
+            System.out.println("Round end!");
+            boolean passed = Monster.AllDead();
+            roundPassed.set(curRound, passed);
+            if(passed)
+                passedNum++;
+            Gaming = false;
+
+            //System.out.println(gameExec.awaitTermination(3, TimeUnit.SECONDS));
+            // stopAllThreads();
+            //TimeUnit.MILLISECONDS.sleep(1000);
+            GUIController.resetRoundButton(false);
+
+
+            GraphicsContext g = GUIController.getMyGraphicContext();
+
+            g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
+
+
+            Monster.resetRound();
+
+
+            Heros.resetRound();
+
+            BattleField.display(g);
+
+
+            //System.out.println("waiting for threads end");
             LogController.saveLog();
-        }
-        catch (Exception e) {
+            if (!creatureExec.awaitTermination(10, TimeUnit.SECONDS)) {
+                System.out.println("oh no");
+                creatureExec.shutdownNow();
+            } else
+                System.out.println("good");
+            if(passedNum == 7)
+                handleGameOver();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        exec.shutdownNow();
-        Skill.skillExec.shutdownNow();
-        try {
-            exec.awaitTermination(100, TimeUnit.DAYS);
-            Skill.skillExec.awaitTermination(100, TimeUnit.DAYS);
-            System.out.println("all shut down");
-            BattleField.print();
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Skill.skillExec = Executors.newCachedThreadPool();
-        exec = Executors.newCachedThreadPool();
+//
+//        try {
+//            exec.awaitTermination(100, TimeUnit.DAYS);
+//            Skill.skillExec.awaitTermination(100, TimeUnit.DAYS);
+//            System.out.println("all shut down");
+//            BattleField.print();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        Skill.skillExec = Executors.newCachedThreadPool();
+//        exec = Executors.newCachedThreadPool();
     }
     public static int getCurRound() {
         return curRound;
@@ -92,12 +111,16 @@ public class GameController {
         for (int i = 0; i < numOfRound; i++)
             roundPassed.add(false);
 
-        exec = Executors.newCachedThreadPool();
+        gameExec = Executors.newCachedThreadPool();
         Heros.getInstance().snake();
         BattleField.display(GUIController.getMyGraphicContext());
+        gameExec.execute(GameController.getInstance());
+        gameExec.shutdown();
 
     }
-    public static void handleRoundStart() {
+    private static void handleRoundStart() {
+        System.out.println("round start!");
+        creatureExec = Executors.newCachedThreadPool();
         LogController.openNewRoundLog(curRound);
         Gaming = true;
         GUIController.resetRoundButton(true);
@@ -106,28 +129,50 @@ public class GameController {
         //
 
         //Heros
-        exec.execute(Grandpa.getInstance());
+        creatureExec.execute(Grandpa.getInstance());
         for (int i = 0; i < 7; i++) {
-            exec.execute(Heros.gourdBrothers.get(i));
+           creatureExec.execute(Heros.gourdBrothers.get(i));
         }
 
         //Monsters
         for (int i = 0; i < Monster.numOfMinion; i++) {
-            exec.execute(Monster.minions.get(i));
+            creatureExec.execute(Monster.minions.get(i));
         }
-        exec.execute(Monster.SCORPION);
+        creatureExec.execute(Monster.SCORPION);
         //cdLatch = new CountDownLatch(7 + Monster.numOfMinion + 2);
-        //xec.shutdown();
+        creatureExec.shutdown();
     }
 
     public static void setCurRound(int round) {
         curRound = round;
     }
 
-
+    @Deprecated
     public static ExecutorService getExecutor() {
-        return exec;
+        //return exec;
+        return null;
     }
 
-
+    @Override
+    public void run() {
+        synchronized (GameController.getInstance()) {
+            while (!GameEnd) {
+                //Listen for Round start and end
+                try {
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                    if (roundStart) {
+                        handleRoundStart();
+                        roundStart = false;
+                    }
+                    if (roundEnd) {
+                        handleRoundEnd();
+                        roundEnd = false;
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,54 @@
+minion 1 moveTo (3, 8)
+二娃 use skill: LASER
+六娃 use skill: ILLUSION
+Scorpion moveTo (5, 10)
+minion 0 moveTo (2, 7)
+minion 2 moveTo (4, 9)
+minion 3 moveTo (6, 9)
+minion 5 moveTo (8, 7)
+minion 4 moveTo (7, 8)
+二娃 use skill: LASER
+六娃 use skill: ILLUSION
+二娃 use skill: LASER
+六娃 use skill: ILLUSION
+minion 1 moveTo (3, 7)
+minion 0 moveTo (2, 6)
+minion 2 moveTo (4, 8)
+minion 3 moveTo (6, 8)
+minion 4 moveTo (7, 7)
+minion 5 moveTo (8, 6)
+二娃 use skill: LASER
+minion 1 dead
+minion 4 dead
+Scorpion moveTo (5, 9)
+minion 0 moveTo (2, 5)
+minion 2 moveTo (4, 7)
+大娃 use skill: PUNCH
+minion 3 moveTo (6, 7)
+七娃 use skill: ABSORB
+minion 5 moveTo (8, 5)
+minion 0 moveTo (2, 4)
+minion 2 moveTo (4, 6)
+minion 3 moveTo (6, 6)
+minion 5 moveTo (8, 4)
+大娃 use skill: PUNCH
+minion 0 dead
+七娃 use skill: ABSORB
+minion 5 dead
+Scorpion moveTo (5, 8)
+minion 2 moveTo (4, 5)
+三娃 use skill: WALL
+minion 3 moveTo (6, 5)
+五娃 use skill: WATER
+minion 2 moveTo (4, 4)
+minion 3 moveTo (6, 4)
+Scorpion moveTo (5, 7)
+五娃 use skill: WATER
+minion 3 dead
+三娃 use skill: WALL
+minion 2 dead
+Scorpion moveTo (5, 6)
+四娃 use skill: FIRE
+Scorpion moveTo (5, 5)
+四娃 use skill: FIRE
+Scorpion dead

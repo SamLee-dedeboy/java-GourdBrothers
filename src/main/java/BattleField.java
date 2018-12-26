@@ -46,13 +46,17 @@ public class BattleField {
         return (at(x, y).getBeing() != null);
     }
 
-    public static boolean hasEnemy(Organism.enumGroup myGroup, int x, int y, int range) {
+    public  static boolean hasEnemy(Organism.enumGroup myGroup, int x, int y, int range) {
         if (range == 1)
             range = 14;
-        for (int i = y + 1; i <= y + range && i < width; i++) {
-            if (at(x, i).getBeing() != null) {
-                return (at(x, i).getBeing().group != myGroup);
+        try {
+            for (int i = y + 1; i <= y + range && i < width; i++) {
+                if (at(x, i).getBeing() != null) {
+                    return (at(x, i).getBeing().group != myGroup);
+                }
             }
+        } catch(NullPointerException e) {
+            return false;
         }
         return false;
     }
@@ -75,7 +79,7 @@ public class BattleField {
                 at(i,j).setNull();
             }
         }
-        print();
+        //print();
     }
     public static synchronized void display(GraphicsContext g) {
 
