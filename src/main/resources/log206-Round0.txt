@@ -1,0 +1,24 @@
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+minion 0 moveTo (2, 9)
+minion 1 moveTo (3, 9)
+minion 2 moveTo (4, 9)
+minion 3 moveTo (6, 9)
+minion 4 moveTo (7, 9)
+minion 5 moveTo (8, 9)
+lydGourdBrother.Beings.Scorpion moveTo (5, 9)
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+Brother-2 use skill: LASER
+minion 0 moveTo (2, 8)
+minion 1 moveTo (3, 8)
+minion 2 moveTo (4, 8)
+minion 3 moveTo (6, 8)
+lydGourdBrother.Beings.Scorpion moveTo (5, 8)
+minion 4 moveTo (7, 8)
+minion 5 moveTo (8, 8)
+Brother-6 use skill: ILLUSION
+minion 1 dead
+minion 4 dead

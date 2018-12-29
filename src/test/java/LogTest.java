@@ -1,3 +1,4 @@
+import lydGourdBrother.Controller.LogController;
 import org.junit.Test;
 
 public class LogTest {

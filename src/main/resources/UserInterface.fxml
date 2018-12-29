@@ -10,7 +10,7 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
                 xmlns:fx="http://javafx.com/fxml"
-                fx:controller="GUIController"
+                fx:controller="lydGourdBrother.Controller.GUIController"
                 prefHeight="800.0" prefWidth="1420.0"
                 stylesheets="UserInterface.css">
         <right>

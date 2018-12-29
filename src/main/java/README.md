@@ -3,26 +3,26 @@
 ####在面向对象思想的指导下，整个程序包含的类可以分为三大类：战场，阵营和生物。每个大类又具体划分如下：
 
 ##1. 战场：
-###class BattleFeld，  class Block: 
-- BattleField是整个战场的抽象，主要的成员变量是一个 NxN 的 Block 类型二维数组
-- 战场上的每一个地块都是 Block 类的一个对象。 每个Block包含一个Organism(生命体)的成员对象
+###class BattleFeld，  class lydGourdBrother.GamingCollections.Block: 
+- BattleField是整个战场的抽象，主要的成员变量是一个 NxN 的 lydGourdBrother.GamingCollections.Block 类型二维数组
+- 战场上的每一个地块都是 lydGourdBrother.GamingCollections.Block 类的一个对象。 每个Block包含一个Organism(生命体)的成员对象
 
 ##2. 阵营：
-###Interface Formations:
+###Interface lydGourdBrother.GamingCollections.Formations:
 - 声明了7个阵型所对应的函数。将Formations单独抽象成一个接口是考虑到日后葫芦娃阵营和蛇蝎精阵营都需要实现这7个阵型，但具体实现的代码却不一定一样。
-- ##abstract class Group implements Formations
+- ##abstract class lydGourdBrother.GamingCollections.Group implements lydGourdBrother.GamingCollections.Formations
 - 阵营的一个抽象类，是Heros类和Monster类的父类, 由于实现了接口Formations, 又是一个抽象类，所以他的子类Heros和Monster必须给出Formations的具体实现。
 
-###class Heros, Monster extends Group
+###class lydGourdBrother.GamingCollections.Heros, lydGourdBrother.GamingCollections.Monster extends lydGourdBrother.GamingCollections.Group
 - Heros和Monster都是Group的一个子类，分别代表了两个阵营。 Heros中包含爷爷和7个葫芦娃， Monster中包含蛇精，蝎子精和数量可变的喽啰。 两个类分别给出Formations的具体实现 (目前Heros类只写了蛇形阵的具体实现，其他阵型为空)。
 ##3. 生物:
-###abstract class Organism
-- 所有生命体(包括葫芦娃, 爷爷, 蛇蝎精, 喽啰)的父类, 其中包含了一个成员对象Block position表示当前的生命体所处的位置, 以及一个函数moveTo(Block b), 用于生命体的移动。
-###class Gourd extends Organism
+###abstract class lydGourdBrother.Beings.Organism
+- 所有生命体(包括葫芦娃, 爷爷, 蛇蝎精, 喽啰)的父类, 其中包含了一个成员对象Block position表示当前的生命体所处的位置, 以及一个函数moveTo(lydGourdBrother.GamingCollections.Block b), 用于生命体的移动。
+###class lydGourdBrother.Beings.Gourd extends lydGourdBrother.Beings.Organism
 - 葫芦娃类。在homework2中使用了enum来定义葫芦娃， 但这里为了要让葫芦娃能继承父类Organism， 我将葫芦娃的枚举类型包装成了一个类， 枚举类型在类中定义且是每个对象的一个成员对象
 
 
-		public class Gourd extends Organism {
+		public class lydGourdBrother.Beings.Gourd extends lydGourdBrother.Beings.Organism {
 			public enum enum_Gourd {
 	  	    	RED("老大", "赤", 0), ORANGE("老二", "橙", 1), YELLOW("老三", "黄", 2),
 	  	    	GREEN("老四", "绿", 3), CYAN("老五", "青", 4), BLUE("老六", "蓝", 5), PURPLE("老七", "紫", 6);
@@ -38,14 +38,14 @@
 	    	}
    			private enum_Gourd gourd;
 			//构造函数
-			Gourd(int rank){
+			lydGourdBrother.Beings.Gourd(int rank){
        		 	gourd = enum_Gourd.values()[rank];
     		}
 			...
-###class Grandpa, Scorpion, Serpent
+###class lydGourdBrother.Beings.Grandpa, lydGourdBrother.Beings.Scorpion, lydGourdBrother.Beings.Serpent
 - 这三个类比较类似，都是单例对象并且需要继承父类Organism。仿照葫芦娃类的设计方法， 在类内部定义了一个枚举对象来满足上述要求。
 
-###class Minion extends Organism
+###class lydGourdBrother.Beings.Minion extends lydGourdBrother.Beings.Organism
 - 喽啰不需要单例，因此只是一个普通的类，可以创建无数个对象
 
  
