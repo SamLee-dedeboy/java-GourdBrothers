@@ -133,9 +133,9 @@ public class GameController implements  Runnable{
         BattleField.display(GUIController.getMyGraphicContext());
         gameExec.execute(GameController.getInstance());
         gameExec.shutdown();
-        GraphicsContext g = GUIController.getMyGraphicContext();
-        g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GameOver.jpg")).toString()),
-                0,0,1220, 800);
+//        GraphicsContext g = GUIController.getMyGraphicContext();
+//        g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GameOver.jpg")).toString()),
+//                0,0,1220, 800);
     }
     private static void handleRoundStart() {
        // System.out.println("round start!");
