@@ -49,7 +49,18 @@ public class GUIController implements Initializable {
         g = gameView.getGraphicsContext2D();
         GameController.initGame();
     }
-
+    public static void setAllButtonDisable() {
+        instance.buttonSnake.setDisable(true);
+        instance.buttonCrane.setDisable(true);
+        instance.buttonWildGoose.setDisable(true);
+        instance. buttonYoke.setDisable(true);
+        instance.buttonScale.setDisable(true);
+        instance.buttonDiamond.setDisable(true);
+        instance.buttonCrescent.setDisable(true);
+        instance.buttonArrow.setDisable(true);
+        instance.buttonStart.setDisable(true);
+        instance.buttonEnd.setDisable(true);
+    }
     public static void setRoundButtonDisable(boolean start) {
         if(start) {
             instance.buttonSnake.setDisable(true);
@@ -84,8 +95,8 @@ public class GUIController implements Initializable {
 
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
-
-
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round1.jpg").toString()),
+                400, 0, 450,150);
         GameController.setCurRound(0);
     }
 
@@ -94,6 +105,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().crane();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round2.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(1);
     }
 
@@ -102,6 +116,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().wildGoose();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round3.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(2);
     }
 
@@ -110,6 +127,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().yoke();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round4.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(3);
     }
 
@@ -118,6 +138,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().scale();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round5.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(4);
     }
 
@@ -126,6 +149,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().diamond();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round6.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(5);
     }
 
@@ -134,6 +160,9 @@ public class GUIController implements Initializable {
         Monster.getInstance().crescent();
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round7.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(6);
     }
 
@@ -143,11 +172,15 @@ public class GUIController implements Initializable {
         g.clearRect(0, 0, Constants.width - Constants.rightWidth, Constants.height);
 
         BattleField.display(gameView.getGraphicsContext2D());
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round8.jpg").toString()),
+                400, 0, 450,150);
+
         GameController.setCurRound(7);
     }
 
     @FXML
     private void handleButtonStart(ActionEvent event) {
+        g.clearRect(400,0,450,150);
         GameController.setRoundStart();
     }
 

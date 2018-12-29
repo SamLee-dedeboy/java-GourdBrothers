@@ -50,7 +50,10 @@ public class GameController implements  Runnable{
 //        exec = Executors.newCachedThreadPool();
     }
     private static void handleGameOver() {
-        //TODO
+        GraphicsContext g = GUIController.getMyGraphicContext();
+        g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GameOver.jpg")).toString()),
+                0,0,1220, 800);
+        GUIController.setAllButtonDisable();
     }
     private static void handleRoundEnd() {
         try {
@@ -69,9 +72,11 @@ public class GameController implements  Runnable{
             // stopAllThreads();
             //TimeUnit.MILLISECONDS.sleep(1000);
             GraphicsContext g = GUIController.getMyGraphicContext();
-            g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GamePassed.jpg")).toString()),
-                    250,250,600, 300);
-            TimeUnit.MILLISECONDS.sleep(2000);
+            if(passed) {
+                g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GamePassed.jpg")).toString()),
+                        250, 250, 600, 300);
+                TimeUnit.MILLISECONDS.sleep(2000);
+            }
             GUIController.resetRoundButton(false);
             g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
 
@@ -119,7 +124,6 @@ public class GameController implements  Runnable{
         BattleField.display(GUIController.getMyGraphicContext());
         gameExec.execute(GameController.getInstance());
         gameExec.shutdown();
-
     }
     private static void handleRoundStart() {
        // System.out.println("round start!");

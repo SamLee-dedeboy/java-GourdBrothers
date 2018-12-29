@@ -1,0 +1,56 @@
+minion 0 moveTo (2, 11)
+minion 3 moveTo (6, 9)
+minion 1 moveTo (3, 10)
+minion 2 moveTo (4, 9)
+Brother-6 use skill: ILLUSION
+Brother-2 use skill: LASER
+Scorpion moveTo (5, 9)
+minion 5 moveTo (8, 7)
+minion 4 moveTo (7, 8)
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+Brother-2 use skill: LASER
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+minion 0 moveTo (2, 10)
+minion 1 moveTo (3, 9)
+minion 3 moveTo (6, 8)
+minion 2 moveTo (4, 8)
+minion 5 moveTo (8, 6)
+minion 4 moveTo (7, 7)
+minion 1 dead
+minion 4 dead
+Scorpion moveTo (5, 8)
+minion 0 moveTo (2, 9)
+minion 2 moveTo (4, 7)
+minion 3 moveTo (6, 7)
+minion 5 moveTo (8, 5)
+Brother-7 use skill: ABSORB
+minion 0 moveTo (2, 8)
+minion 2 moveTo (4, 6)
+minion 3 moveTo (6, 6)
+minion 5 moveTo (8, 4)
+Brother-7 use skill: ABSORB
+minion 5 dead
+Scorpion moveTo (5, 7)
+minion 0 moveTo (2, 7)
+Brother-3 use skill: WALL
+minion 2 moveTo (4, 5)
+Brother-5 use skill: WATER
+minion 3 moveTo (6, 5)
+minion 0 moveTo (2, 6)
+Scorpion moveTo (5, 6)
+minion 3 moveTo (6, 4)
+minion 2 moveTo (4, 4)
+Brother-5 use skill: WATER
+minion 3 dead
+Brother-3 use skill: WALL
+minion 2 dead
+minion 0 moveTo (2, 5)
+Brother-1 use skill: PUNCH
+Scorpion moveTo (5, 5)
+Brother-4 use skill: FIRE
+Brother-1 use skill: PUNCH
+minion 0 dead
+Brother-4 use skill: FIRE
+Scorpion dead

@@ -14,8 +14,8 @@
                 prefHeight="800.0" prefWidth="1420.0"
                 stylesheets="UserInterface.css">
         <right>
-            <VBox spacing="10" style="-fx-background-color : #EBF0FA">
-                <padding> <Insets right="90" left="90"/> </padding>
+            <VBox spacing="10" style="-fx-background-color : #567f4d">
+                <padding> <Insets right="50" left="50"/> </padding>
                 <children>
                     <Button fx:id="buttonStart" text="StartRound" prefHeight="70" prefWidth="120" onAction="#handleButtonStart"/>
                     <Button fx:id="buttonEnd" text="EndRound" prefHeight="70" prefWidth="120" onAction="#handleButtonEnd" disable="true"/>
@@ -30,5 +30,5 @@
                 </children>
             </VBox>
         </right>
-        <Canvas fx:id="gameView" width="1120" height="800" />
+        <Canvas fx:id="gameView" width="1220" height="800" />
     </BorderPane>

@@ -1,11 +1,11 @@
 .root {
     -fx-background-image: url("background3.jpg");
-    -fx-background-size: contain;
-    -fx-background-repeat: repeat;
+    -fx-background-size: stretch;
+    -fx-background-repeat: no-repeat;
 }
 
 .button {
-    -fx-background-color: linear-gradient(to bottom,#7dc2fe,#004883);
+    -fx-background-color: linear-gradient(to bottom,#65d34d,#2f9618);
     -fx-text-alignment: center;
     -fx-text-fill: #fff;
     -fx-border-radius: 8px;
