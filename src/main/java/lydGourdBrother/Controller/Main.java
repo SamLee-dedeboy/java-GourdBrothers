@@ -5,12 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lydGourdBrother.myAnnotation.Author;
 
-
+@Author(name = "LEE-YUTE", Group = "nju-java-2018f")
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("UserInterface.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -18,7 +18,6 @@ public class Main extends Application {
 
     }
     public static void main(String[] args) {
-
         launch(args);
 
     }

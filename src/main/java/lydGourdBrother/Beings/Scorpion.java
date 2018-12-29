@@ -14,7 +14,7 @@ public class Scorpion extends Organism {
     }
 
     private Scorpion() {
-        name = "lydGourdBrother.Beings.Scorpion";
+        name = "Scorpion";
         group = enumGroup.MONSTER;
         image = new Image(this.getClass().getClassLoader().getResource(("scorpion.jpg")).toString());
         deadImage = new Image(this.getClass().getClassLoader().getResource(("DeadScorpion.jpg")).toString());
@@ -27,7 +27,7 @@ public class Scorpion extends Organism {
             try {
                 if (!isDead()) {
                     moveForward(-1);
-                    LogController.writeLog("lydGourdBrother.Beings.Scorpion moveTo ("
+                    LogController.writeLog("Scorpion moveTo ("
                                 + position.getX() + ", " + position.getY() + ")");
 
                     TimeUnit.MILLISECONDS.sleep(1500);

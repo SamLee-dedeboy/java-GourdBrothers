@@ -14,7 +14,7 @@ import lydGourdBrother.GamingCollections.Monster;
 import lydGourdBrother.Skills.Skill;
 
 public abstract class Organism implements Runnable {
-    public enum enumGroup {HERO, MONSTER}
+    public enum enumGroup {HERO, MONSTER};
     public Skill skill = null;
     public int healthPoint = Constants.initialHealthPoint;
     public enumGroup group;

@@ -10,7 +10,7 @@ public class Grandpa extends Organism implements Runnable {
     private static Grandpa instance = new Grandpa();
     public boolean cheering = false;
     private Grandpa() {
-        name = "lydGourdBrother.Beings.Grandpa";
+        name = "Grandpa";
         group = enumGroup.HERO;
         image = new Image(this.getClass().getClassLoader().getResource(("grandpa.jpg")).toString());
     }
