@@ -11,6 +11,7 @@ public abstract class Organism implements Runnable {
     protected String name;
     public enumGroup group;
     protected Image image;
+    protected Image deadImage;
     protected Block position = null;
     protected Image usingSkillImage = null;
     protected Skill skill = null;
@@ -59,13 +60,14 @@ public abstract class Organism implements Runnable {
                                 }
                             }
                         }
+                        BattleField.at(position.getX(), position.getY()).setNull();
                     } else {
                         if (being.getClass() == Minion.class) {
                             Monster.SetMinionDead();
                         }
                     }
                 }
-                BattleField.at(position.getX(), position.getY()).setNull();
+
             }
             LogController.writeLog(this.tellName() + " dead");
             try {
@@ -86,7 +88,12 @@ public abstract class Organism implements Runnable {
 
     public String tellName() { return name; }
 
-    public Image getImage() { return image; }
+    public Image getImage() {
+        if(dead && this.group == enumGroup.MONSTER)
+            return deadImage;
+        else
+            return image;
+    }
     public Image getUsingSkillImage() { return usingSkillImage; }
     public void moveForward(int direction) {
         int oldPosition_X = position.getX();
@@ -99,8 +106,12 @@ public abstract class Organism implements Runnable {
                     killBeing(nextPosition_X, nextPosition_Y);
                     System.out.println("kill huluwa!");
                 } else {
-                    System.out.println("met friend");
-                    return;
+                    if(BattleField.at(nextPosition_X,nextPosition_Y).getBeing().dead) {
+                        BattleField.at(nextPosition_X, nextPosition_Y).setNull();
+                    } else {
+                        System.out.println("met friend");
+                        return;
+                    }
                 }
             }
             if(nextPosition_Y < 0)

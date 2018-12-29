@@ -8,7 +8,8 @@ public class Minion extends Organism {
         this.index = index;
         name = "minion " + index;
         group = enumGroup.MONSTER;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\minion.jpg");
+        image = new Image(this.getClass().getClassLoader().getResource(("minion.jpg")).toString());
+        deadImage = new Image(this.getClass().getClassLoader().getResource(("DeadMinion.jpg")).toString());
 
     }
 
@@ -28,14 +29,15 @@ public class Minion extends Organism {
                     int waitTime = 1500;
                     TimeUnit.MILLISECONDS.sleep(waitTime);
                 }
-                else
+                else {
                     break;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        System.out.println(tellName() + " end");
+        //System.out.println(tellName() + " end");
     }
 
 

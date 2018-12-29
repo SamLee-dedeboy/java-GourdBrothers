@@ -69,7 +69,7 @@ public class LogController {
     public static void saveLog() {
         try {
             log.close();
-            System.out.println("save log done");
+            //System.out.println("save log done");
         }
         catch (IOException e) {
             e.printStackTrace();

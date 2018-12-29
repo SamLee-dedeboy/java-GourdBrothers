@@ -3,19 +3,17 @@ import javafx.scene.image.Image;
 import java.util.concurrent.TimeUnit;
 
 public class Scorpion extends Organism {
-    private static Scorpion instance;
+    private static Scorpion instance = new Scorpion();
 
     public static synchronized Scorpion getInstance() {
-        if (instance == null) {
-            instance = new Scorpion();
-        }
         return instance;
     }
 
     private Scorpion() {
         name = "Scorpion";
         group = enumGroup.MONSTER;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\scorpion.jpg");
+        image = new Image(this.getClass().getClassLoader().getResource(("scorpion.jpg")).toString());
+        deadImage = new Image(this.getClass().getClassLoader().getResource(("DeadScorpion.jpg")).toString());
 
     }
 
@@ -37,7 +35,7 @@ public class Scorpion extends Organism {
             }
         }
        // GameController.cdLatch.countDown();
-        System.out.println(tellName() + " end");
+        //System.out.println(tellName() + " end");
     }
 
 

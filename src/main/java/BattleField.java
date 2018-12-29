@@ -52,7 +52,8 @@ public class BattleField {
         try {
             for (int i = y + 1; i <= y + range && i < width; i++) {
                 if (at(x, i).getBeing() != null) {
-                    return (at(x, i).getBeing().group != myGroup);
+                    if(!at(x,i).getBeing().dead)
+                        return (at(x, i).getBeing().group != myGroup);
                 }
             }
         } catch(NullPointerException e) {

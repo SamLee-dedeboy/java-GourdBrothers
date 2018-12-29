@@ -14,7 +14,7 @@ public class Serpent extends Organism {
     private Serpent() {
         name = "Serpant";
         group = enumGroup.MONSTER;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\serpent.jpg");
+        image = new Image(this.getClass().getClassLoader().getResource(("serpent.jpg")).toString());
 
     }
 

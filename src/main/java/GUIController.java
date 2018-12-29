@@ -5,11 +5,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
-    private static GUIController instance = null;
+    private static GUIController instance;
     //constructor only called by fxml loader
     public GUIController() {
         //a special Singleton, see the comment below

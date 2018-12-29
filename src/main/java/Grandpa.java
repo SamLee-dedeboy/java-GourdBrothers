@@ -8,8 +8,7 @@ public class Grandpa extends Organism implements Runnable {
     private Grandpa() {
         name = "Grandpa";
         group = enumGroup.HERO;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\grandpa.jpg");
-
+        image = new Image(this.getClass().getClassLoader().getResource(("grandpa.jpg")).toString());
     }
 
     public static Grandpa getInstance() {
@@ -21,9 +20,9 @@ public class Grandpa extends Organism implements Runnable {
         try {
             while (GameController.Gaming) {
                 if (!isDead()) {
-                    System.out.println("not dead");
+                    //System.out.println("not dead");
                     if (!cheering) {
-                        System.out.println("try cheers");
+                        //System.out.println("try cheers");
                         cheers();
                         if(GameController.Gaming)
                             TimeUnit.MILLISECONDS.sleep(3000);
@@ -39,16 +38,16 @@ public class Grandpa extends Organism implements Runnable {
             e.printStackTrace();
         }
         //GameController.cdLatch.countDown();
-        System.out.println(tellName() + " end");
+        //System.out.println(tellName() + " end");
     }
 
 
     public void cheers() {
         int doCheer = (int) (2000 + Math.random() * (2000 + 1));
         if(doCheer%20 == 0) {   // cheer by probability = 1/20
-            System.out.println("cheer success!");
+           // System.out.println("cheer success!");
             synchronized (Heros.getInstance()) {
-                    Heros.setFrequency(Heros.getFrequency() / 10);
+                    Heros.setFrequency(Heros.getFrequency() / 3);
             }
             cheering = true;
         }

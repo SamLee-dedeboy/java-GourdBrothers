@@ -3,6 +3,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -39,7 +40,7 @@ public class Skill {
                 this.skillRange = 3;
                 attackPoint = 6;
             }
-            skillImage = new Image(imagePath + (((Gourd) user).tellRank() + 1) + "_skill.png");
+            skillImage = new Image(this.getClass().getClassLoader().getResource(("GourdBrother" + (((Gourd) user).tellRank()+1) + "_skill.jpg")).toString());
         } else
             skillImage = null;
         //attackPoint = 11;

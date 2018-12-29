@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 public class Gourd extends Organism implements Runnable {
 
     public enum enum_Gourd {
-        RED("大娃", "RED", 0), ORANGE("二娃", "ORANGE", 1), YELLOW("三娃", "YELLOW", 2),
-        GREEN("四娃", "GREEN", 3), CYAN("五娃", "CYAN", 4), BLUE("六娃", "BLUE", 5), PURPLE("七娃", "PURPLE", 6);
+        RED("Brother-1", "RED", 0), ORANGE("Brother-2", "ORANGE", 1), YELLOW("Brother-3", "YELLOW", 2),
+        GREEN("Brother-4", "GREEN", 3), CYAN("Brother-5", "CYAN", 4), BLUE("Brother-6", "BLUE", 5), PURPLE("Brother-7", "PURPLE", 6);
         private String name, color;
         private int rank;
 
@@ -38,7 +38,7 @@ public class Gourd extends Organism implements Runnable {
         gourd = enum_Gourd.values()[rank];
         name = gourd.name;
         group = enumGroup.HERO;
-        image = new Image("file:D:\\IDEA-projects\\GourdBrothers\\src\\main\\resources\\" + (rank + 1) + ".jpg");
+        image = new Image(this.getClass().getClassLoader().getResource(("GourdBrother" + (rank +  1) +".jpg")).toString());
         skill = new Skill(this);
     }
 
@@ -74,6 +74,6 @@ public class Gourd extends Organism implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(tellName() + " end");
+        //System.out.println(tellName() + " end");
     }
 }

@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -39,7 +40,7 @@ public class GameController implements  Runnable{
     }
     @Deprecated
     public static void setRoundFailed() {
-        System.out.println("round failed");
+        //System.out.println("round failed");
         roundPassed.set(curRound, false);
         handleRoundEnd();
     }
@@ -53,21 +54,25 @@ public class GameController implements  Runnable{
     }
     private static void handleRoundEnd() {
         try {
-            System.out.println("Round end!");
+           // System.out.println("Round end!");
             boolean passed = Monster.AllDead();
             roundPassed.set(curRound, passed);
             if(passed)
                 passedNum++;
             Gaming = false;
-
+            if (!creatureExec.awaitTermination(10, TimeUnit.SECONDS)) {
+                //System.out.println("oh no");
+                creatureExec.shutdownNow();
+            }
+                //System.out.println("good");
             //System.out.println(gameExec.awaitTermination(3, TimeUnit.SECONDS));
             // stopAllThreads();
             //TimeUnit.MILLISECONDS.sleep(1000);
-            GUIController.resetRoundButton(false);
-
-
             GraphicsContext g = GUIController.getMyGraphicContext();
-
+            g.drawImage(new Image(instance.getClass().getClassLoader().getResource(("GamePassed.jpg")).toString()),
+                    250,250,600, 300);
+            TimeUnit.MILLISECONDS.sleep(2000);
+            GUIController.resetRoundButton(false);
             g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
 
 
@@ -81,11 +86,7 @@ public class GameController implements  Runnable{
 
             //System.out.println("waiting for threads end");
             LogController.saveLog();
-            if (!creatureExec.awaitTermination(10, TimeUnit.SECONDS)) {
-                System.out.println("oh no");
-                creatureExec.shutdownNow();
-            } else
-                System.out.println("good");
+
             if(passedNum == 7)
                 handleGameOver();
         } catch (Exception e) {
@@ -111,6 +112,8 @@ public class GameController implements  Runnable{
         for (int i = 0; i < numOfRound; i++)
             roundPassed.add(false);
 
+
+
         gameExec = Executors.newCachedThreadPool();
         Heros.getInstance().snake();
         BattleField.display(GUIController.getMyGraphicContext());
@@ -119,7 +122,7 @@ public class GameController implements  Runnable{
 
     }
     private static void handleRoundStart() {
-        System.out.println("round start!");
+       // System.out.println("round start!");
         creatureExec = Executors.newCachedThreadPool();
         LogController.openNewRoundLog(curRound);
         Gaming = true;
