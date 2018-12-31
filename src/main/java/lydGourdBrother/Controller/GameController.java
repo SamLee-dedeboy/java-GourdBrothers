@@ -87,6 +87,7 @@ public class GameController implements  Runnable{
                 TimeUnit.MILLISECONDS.sleep(2000);
             }
             GUIController.resetRoundButton(false);
+            GUIController.setButtonEndDisable(true);
             g.clearRect(0, 0, Block.size * BattleField.getWidth(), Block.size * BattleField.getHeight());
 
 

@@ -1,0 +1,13 @@
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION
+minion 7 moveTo (8, 9)
+minion 0 moveTo (5, 6)
+minion 2 moveTo (6, 7)
+minion 1 moveTo (4, 7)
+minion 3 moveTo (5, 8)
+minion 4 moveTo (3, 8)
+minion 5 moveTo (7, 8)
+minion 6 moveTo (2, 9)
+Scorpion moveTo (5, 10)
+Brother-2 use skill: LASER
+Brother-6 use skill: ILLUSION

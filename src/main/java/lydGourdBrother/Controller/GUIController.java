@@ -50,7 +50,7 @@ public class GUIController implements Initializable {
         g = gameView.getGraphicsContext2D();
         GameController.initGame();
     }
-    public static void setAllButtonDisable() {
+    static void setAllButtonDisable() {
         instance.buttonSnake.setDisable(true);
         instance.buttonCrane.setDisable(true);
         instance.buttonWildGoose.setDisable(true);
@@ -98,6 +98,8 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round1.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
+
         GameController.setCurRound(0);
     }
 
@@ -108,6 +110,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round2.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(1);
     }
@@ -119,6 +122,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round3.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(2);
     }
@@ -130,6 +134,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round4.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(3);
     }
@@ -141,6 +146,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round5.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(4);
     }
@@ -152,6 +158,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round6.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(5);
     }
@@ -163,6 +170,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round7.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(6);
     }
@@ -175,6 +183,7 @@ public class GUIController implements Initializable {
         BattleField.display(gameView.getGraphicsContext2D());
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("Round8.jpg").toString()),
                 400, 0, 450,150);
+        instance.buttonStart.setDisable(false);
 
         GameController.setCurRound(7);
     }
@@ -182,6 +191,9 @@ public class GUIController implements Initializable {
     @FXML
     private void handleButtonStart(ActionEvent event) {
         g.clearRect(400,0,450,150);
+        instance.buttonStart.setDisable(true);
+        instance.buttonEnd.setDisable(false);
+
         GameController.setRoundStart();
     }
 
@@ -189,13 +201,16 @@ public class GUIController implements Initializable {
     private void handleButtonEnd(ActionEvent event) {
         g.drawImage(new Image(instance.getClass().getClassLoader().getResource("EndRound.jpg").toString()),
                 300, 0, 597,134);
+        instance.buttonStart.setDisable(true);
+        instance.buttonEnd.setDisable(true);
 
         GameController.setRoundEnd();
     }
-
+    static void setButtonEndDisable(boolean flag) {
+        instance.buttonEnd.setDisable(flag);
+    }
     static void resetRoundButton(boolean start) {
         setRoundButtonDisable(start);
-        instance.buttonStart.setDisable(start);
-        instance.buttonEnd.setDisable(!start);
+
     }
 }

@@ -17,7 +17,7 @@
             <VBox spacing="10" style="-fx-background-color : #567f4d">
                 <padding> <Insets right="50" left="50"/> </padding>
                 <children>
-                    <Button fx:id="buttonStart" text="StartRound" prefHeight="70" prefWidth="120" onAction="#handleButtonStart"/>
+                    <Button fx:id="buttonStart" text="StartRound" prefHeight="70" prefWidth="120" onAction="#handleButtonStart" disable="true"/>
                     <Button fx:id="buttonEnd" text="EndRound" prefHeight="70" prefWidth="120" onAction="#handleButtonEnd" disable="true"/>
                     <Button fx:id="buttonSnake" text="Snake" prefHeight="70" prefWidth="120" onAction="#handleButtonSnake"/>
                     <Button fx:id="buttonCrane" text="Crane" prefHeight="70" prefWidth="120" onAction="#handleButtonCrane"/>
